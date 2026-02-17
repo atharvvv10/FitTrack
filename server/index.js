@@ -127,7 +127,10 @@ app.use(express.static(distPath));
 
 // Handle Client-Side Routing (SPA Catch-all)
 // Must be AFTER all API routes
-app.get('*', (req, res) => {
+// Handle Client-Side Routing (SPA Catch-all)
+// Must be AFTER all API routes
+// Fix for Express 5: Use /(.*) or regex instead of * to avoid "Missing parameter name" error
+app.get(/(.*)/, (req, res) => {
     // If request asks for a file that exists, serve it (handled by static above mostly)
     // Otherwise serve index.html
     if (req.path.startsWith('/api')) {
