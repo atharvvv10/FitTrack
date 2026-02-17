@@ -111,6 +111,61 @@ app.get('/api/workouts/:userId', async (req, res) => {
     }
 });
 
+// API: Log Diet/Meal
+app.post('/api/diet/log', async (req, res) => {
+    const { userId, date, mealType, foodName, calories, protein, completed } = req.body;
+
+    try {
+        // Upsert logic (insert or update if exists)
+        const query = `
+            INSERT INTO diet_logs (user_id, date, meal_type, food_name, calories, protein, completed)
+            VALUES ($1, $2, $3, $4, $5, $6, $7)
+            ON CONFLICT (user_id, date, meal_type)
+            DO UPDATE SET 
+                food_name = EXCLUDED.food_name,
+                calories = EXCLUDED.calories,
+                protein = EXCLUDED.protein,
+                completed = EXCLUDED.completed,
+                created_at = current_timestamp();
+        `;
+        const values = [userId, date, mealType, foodName, calories, protein, completed];
+
+        await pool.query(query, values);
+        console.log(`✅ Diet logged for ${userId}: ${mealType} on ${date}`);
+        res.json({ success: true, message: "Diet logged" });
+    } catch (err) {
+        console.error("❌ Error logging diet:", err);
+        res.status(500).json({ error: "Failed to log diet" });
+    }
+});
+
+// API: Get Diet Logs
+app.get('/api/diet/logs', async (req, res) => {
+    const { userId, date } = req.query; // Fetch from query params
+
+    if (!userId) {
+        return res.status(400).json({ error: "Missing userId" });
+    }
+
+    try {
+        let query = `SELECT * FROM diet_logs WHERE user_id = $1`;
+        const params = [userId];
+
+        if (date) {
+            query += ` AND date = $2`;
+            params.push(date);
+        }
+
+        query += ` ORDER BY date DESC, created_at ASC`;
+
+        const result = await pool.query(query, params);
+        res.json(result.rows);
+    } catch (err) {
+        console.error("❌ Error fetching diet logs:", err);
+        res.status(500).json({ error: "Failed to fetch diet logs" });
+    }
+});
+
 // ... (Diet APIs skipped for brevity in replace block, keep them)
 
 // Serve Static Assets (Exercise Images) - Keep this
