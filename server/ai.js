@@ -1,4 +1,4 @@
-
+﻿
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import Groq from "groq-sdk";
 import pg from 'pg';
@@ -75,7 +75,7 @@ export const generateAIWorkout = async (userProfile) => {
         `;
 
         try {
-            console.log("🏋️ Sending Workout Request to Groq (Llama3-70b)...");
+            console.log("ðŸ‹ï¸ Sending Workout Request to Groq (Llama3-70b)...");
             const completion = await groqWorkout.chat.completions.create({
                 messages: [
                     { role: "system", content: "You are an elite fitness coach. You output ONLY valid JSON." },
@@ -88,7 +88,7 @@ export const generateAIWorkout = async (userProfile) => {
             });
 
             const jsonString = completion.choices[0]?.message?.content || "{}";
-            console.log("🏋️ Groq Workout Response Received");
+            console.log("ðŸ‹ï¸ Groq Workout Response Received");
             return JSON.parse(jsonString);
         } catch (apiError) {
             console.warn("Groq API Error (Workout):", apiError.message);
@@ -153,7 +153,7 @@ function calculateTargets(profile) {
     else if (goal.includes('weight loss') || goal.includes('cut')) proteinPerKg = 2.2;
     const protein = Math.round(weight * proteinPerKg);
 
-    console.log(`📊 Profile Calc: BMR=${Math.round(bmr)}, TDEE=${tdee}, Target=${tdee} kcal, Protein=${protein}g`);
+    console.log(`ðŸ“Š Profile Calc: BMR=${Math.round(bmr)}, TDEE=${tdee}, Target=${tdee} kcal, Protein=${protein}g`);
     return { calories: tdee, protein };
 }
 
@@ -187,7 +187,7 @@ function normalizeMeals(diet, targetCals, targetProtein) {
         // Fix rounding remainder on dinner
         const newTotal = keys.reduce((s, k) => s + (meals[k]?.cals || 0), 0);
         if (meals.dinner) meals.dinner.cals += (targetCals - newTotal);
-        console.log(`📊 Scaled cals: ${totalCals} → ${targetCals}`);
+        console.log(`ðŸ“Š Scaled cals: ${totalCals} â†’ ${targetCals}`);
     }
 
     // Scale protein if off by more than 2%
@@ -203,7 +203,7 @@ function normalizeMeals(diet, targetCals, targetProtein) {
             const dp = parseNum(meals.dinner.protein);
             meals.dinner.protein = (dp + (targetProtein - newTotal)) + 'g';
         }
-        console.log(`📊 Scaled protein: ${totalProtein}g → ${targetProtein}g`);
+        console.log(`ðŸ“Š Scaled protein: ${totalProtein}g â†’ ${targetProtein}g`);
     }
 
     // Force macroTargets to match
@@ -218,121 +218,157 @@ function normalizeMeals(diet, targetCals, targetProtein) {
 
 export const generateAIDiet = async (userProfile) => {
     try {
-        console.log("🥗 Generating AI Diet Plan...");
+        console.log("Generating dataset-driven Indian diet plan...");
 
-        // Step 1: Calculate exact targets from user profile
+        // Step 1: Calculate exact calorie & protein targets
         const targets = calculateTargets(userProfile);
+        const isNonVeg = (userProfile.diet_type || '').toLowerCase().includes('non');
 
-        console.log(`🍛 Generating Indian Diet Plan...`);
+        // Step 2: Fetch verified Indian foods from ICMR_Curated
+        // These 43 foods are 100% Indian (hand-curated from ICMR-NIN tables)
+        const result = await pool.query(`
+            SELECT name, calories, protein_g, carbs_g, fat_g, fibre_g, food_group, diet_type
+            FROM food_items
+            WHERE source = 'ICMR_Curated'
+              AND calories BETWEEN 50 AND 800
+              AND (diet_type = $1 OR diet_type = 'vegetarian')
+            ORDER BY food_group, name
+        `, [isNonVeg ? 'non-vegetarian' : 'vegetarian']);
 
-        const prompt = `
-You are an expert Indian Nutritionist and Chef. Generate a personalized, AUTHENTIC INDIAN daily diet plan.
+        const foods = result.rows.map(f => ({
+            name: f.name,
+            cals: parseInt(f.calories),
+            pro: parseFloat(f.protein_g) || 0,
+            carbs: parseFloat(f.carbs_g) || 0,
+            fat: parseFloat(f.fat_g) || 0,
+            group: (f.food_group || '').toLowerCase()
+        }));
 
-USER PROFILE:
-- Goal: ${userProfile.goal || 'General Fitness'}
-- Diet Type: ${userProfile.diet_type || 'Vegetarian'}
-- Allergies: ${JSON.stringify(userProfile.allergies || ['None'])}
-- Weight: ${userProfile.weight || '70'}kg
-- Height: ${userProfile.height || '170'}cm
-- Age: ${userProfile.age || '25'}
-- Gender: ${userProfile.gender || 'Male'}
-- Level: ${userProfile.level || 'Beginner'}
+        console.log("Loaded " + foods.length + " verified ICMR Indian foods");
 
-CALCULATED DAILY TARGETS (USE THESE EXACT NUMBERS):
-- Daily Calories: ${targets.calories} kcal
-- Daily Protein: ${targets.protein}g
+        // Step 3: Server-side meal selection by food_group
+        // Targets per meal: B=25%, L=35%, S=15%, D=25%
+        const mealTargets = {
+            breakfast: { calPct: 0.25, group: ['breakfast', 'cereals & grains', 'eggs', 'dairy', 'nuts & seeds'] },
+            lunch:     { calPct: 0.35, group: ['lunch/dinner', 'pulses & legumes', 'meat & seafood', 'soy products', 'cereals & grains'] },
+            snack:     { calPct: 0.15, group: ['snacks', 'fruits', 'nuts & seeds', 'beverages'] },
+            dinner:    { calPct: 0.25, group: ['lunch/dinner', 'pulses & legumes', 'soy products', 'meat & seafood'] }
+        };
 
-MEAL GENERATION RULES:
-1. ALL food must be traditional, common Indian meals eaten daily in Indian households.
-2. Use specific Indian food names (e.g., "Masala Oats Upma with Peanuts", "Moong Dal Chilla with Mint Chutney", "Rajma Chawal with Cucumber Raita", "Palak Paneer with 2 Whole Wheat Roti").
-3. If diet_type is "Vegetarian" or "Vegan", use ONLY plant-based Indian foods (dal, paneer if vegetarian, rajma, chana, tofu, soya, sprouts, etc.)
-4. If diet_type is "Non-Vegetarian", include Indian non-veg options like Chicken Curry, Egg Bhurji, Fish Curry, Mutton Dal, etc.
-5. Pre/Post workout fuels must also be Indian (e.g., "Banana + 2 dates", "Buttermilk", "Boiled Chana", "Egg Whites + Roti").
-6. Supplements should be practical and available in India.
+        const usedNames = new Set();
+        const meals = {};
 
-EXAMPLES OF GOOD INDIAN MEALS (use as inspiration, not exactly):
-- Breakfast: Besan Chilla, Masala Oats, Poha with peanuts, Moong Dal Dosa, Aloo Paratha with curd, Idli with Sambar, Upma, Egg Bhurji with toast
-- Lunch: Dal Tadka + Brown Rice, Rajma Chawal, Palak Paneer + Roti, Chole + Rice, Soya Bhurji + Roti, Chicken Curry + Rice, Mixed Veg Sabzi
-- Snacks: Roasted Chana, Sprouts Salad, Makhana, Boiled Eggs, Peanut Chikki, Fruit Chaat, Dhokla
-- Dinner: Moong Dal Khichdi, Paneer Bhurji + Roti, Tofu Sabzi, Egg Curry, Grilled Chicken + Dal Soup, Vegetable Curry + Roti
+        for (const [slot, config] of Object.entries(mealTargets)) {
+            const targetCals = Math.round(targets.calories * config.calPct);
 
-VARIETY SEED: ${Date.now()}-${Math.random().toString(36).slice(2, 8)}
+            // Pick best food for this slot from matching groups
+            const candidates = foods
+                .filter(f => !usedNames.has(f.name) && config.group.some(g => f.group.includes(g)))
+                .sort((a, b) => Math.abs(a.cals - targetCals) - Math.abs(b.cals - targetCals));
 
-RETURN ONLY valid JSON matching this EXACT schema (no markdown, no commentary):
+            // Fallback: any unused food
+            const food = candidates[0] || foods.find(f => !usedNames.has(f.name)) || foods[0];
+            usedNames.add(food.name);
+
+            // Calculate serving multiplier to hit target calories
+            const rawMultiplier = targetCals / food.cals;
+            const mult = Math.min(2.5, Math.max(0.5, Math.round(rawMultiplier * 4) / 4));
+
+            meals[slot] = {
+                name: food.name,
+                cals: Math.round(food.cals * mult),
+                protein: (Math.round(food.pro * mult * 10) / 10) + 'g',
+                purpose: food.group + ' — ' + Math.round(food.cals * mult) + ' kcal',
+                _rawCals: food.cals,
+                _mult: mult
+            };
+        }
+
+        // Step 4: Normalize total to match exact targets
+        const totalCalsBefore = Object.values(meals).reduce((s, m) => s + m.cals, 0);
+        const diff = targets.calories - totalCalsBefore;
+        // Apply calorie diff to dinner (largest meal)
+        meals.dinner.cals += diff;
+        const dinnerPro = parseFloat(meals.dinner.protein);
+        meals.dinner.protein = (Math.round((dinnerPro + diff * 0.1) * 10) / 10) + 'g';
+
+        // Step 5: Ask AI ONLY for text content (strategy, supplements, motivational text)
+        // AI cannot invent food — meals are already set from real DB
+        const aiTextPrompt = `You are an expert Indian nutritionist. Write advisory content for this diet plan.
+
+USER: ${userProfile.goal || 'Fitness'} goal | ${userProfile.diet_type || 'Vegetarian'} | ${userProfile.weight}kg | ${userProfile.gender || 'Male'} | ${userProfile.level || 'Beginner'}
+TARGETS: ${targets.calories} kcal/day | ${targets.protein}g protein/day
+MEALS: Breakfast: ${meals.breakfast.name}, Lunch: ${meals.lunch.name}, Snack: ${meals.snack.name}, Dinner: ${meals.dinner.name}
+
+Return ONLY this JSON:
 {
-    "summary": "string (e.g. 'Indian Vegetarian Plan for Muscle Gain')",
+    "summary": "Indian ${userProfile.diet_type || 'Vegetarian'} Plan for ${userProfile.goal || 'Fitness'}",
     "strategy": {
-        "bullets": ["string", "string", "string"],
-        "text": "string (1-2 sentence paragraph about the strategy with Indian dietary context)"
-    },
-    "macroTargets": {
-        "cals": "${targets.calories}",
-        "protein": "${targets.protein}g",
-        "logic": "string (explain WHY these targets based on user's BMR, TDEE, and goal)"
-    },
-    "meals": {
-        "breakfast": { "name": "string (specific real Indian food)", "cals": number, "protein": "string with g suffix", "purpose": "string" },
-        "lunch": { "name": "string", "cals": number, "protein": "string with g suffix", "purpose": "string" },
-        "snack": { "name": "string", "cals": number, "protein": "string with g suffix", "purpose": "string" },
-        "dinner": { "name": "string", "cals": number, "protein": "string with g suffix", "purpose": "string" }
+        "bullets": ["tip about timing", "tip about portions", "tip about hydration"],
+        "text": "1-2 sentences explaining why these meals suit the user's goal"
     },
     "trainingFuel": {
-        "pre": "string (Indian pre-workout snack suggestion)",
-        "post": "string (Indian post-workout recovery suggestion)"
+        "pre": "Indian pre-workout snack (e.g. banana + dates, roasted chana)",
+        "post": "Indian post-workout recovery (e.g. chaas + chana, egg bhurji)"
     },
     "focusPoints": [
-        { "title": "string", "icon": "string (single emoji)", "desc": "string (detailed explanation)" },
-        { "title": "string", "icon": "string", "desc": "string" },
-        { "title": "string", "icon": "string", "desc": "string" },
-        { "title": "string", "icon": "string", "desc": "string" }
+        {"title": "string", "icon": "emoji", "desc": "string"},
+        {"title": "string", "icon": "emoji", "desc": "string"},
+        {"title": "string", "icon": "emoji", "desc": "string"}
     ],
     "supplements": [
-        { "name": "string", "dosage": "string (e.g. 5g, 1 tablet)", "context": "string (when/why to take)" },
-        { "name": "string", "dosage": "string", "context": "string" },
-        { "name": "string", "dosage": "string", "context": "string" }
+        {"name": "string", "dosage": "string", "context": "when/why"},
+        {"name": "string", "dosage": "string", "context": "when/why"},
+        {"name": "string", "dosage": "string", "context": "when/why"}
     ],
-    "reassurance": "string (motivational paragraph with Indian cultural references)",
-    "disclaimer": "MEDICAL DISCLAIMER: Consult a qualified healthcare professional before starting any new diet or supplement routine. This guidance is for educational purposes only."
-}
+    "reassurance": "2 sentence motivational message with Indian cultural references"
+}`;
 
-ABSOLUTE RULES:
-1. breakfast.cals + lunch.cals + snack.cals + dinner.cals MUST EQUAL EXACTLY ${targets.calories}.
-2. The sum of all protein values must equal exactly ${targets.protein}g.
-3. Use ONLY authentic Indian foods. No Western meals like sandwiches, salads, pasta etc.
-4. Respect allergies strictly.
-5. All "cals" must be plain numbers. All "protein" must be strings ending in "g".
-6. macroTargets.cals must be "${targets.calories}" and macroTargets.protein must be "${targets.protein}g".
-7. supplements array must have EXACTLY 3 items.
-8. Do NOT repeat generic meals. Make each meal sound distinct, delicious, and practical for Indian kitchens.
-`;
-
-        // ===== GROQ (Llama 3) REQUEST =====
-        console.log("🥗 Sending request to Groq (Llama3-70b)...");
         const completion = await groqDiet.chat.completions.create({
             messages: [
-                { role: "system", content: "You are a professional nutritionist and chef. You output ONLY valid JSON." },
-                { role: "user", content: prompt }
+                { role: "system", content: "You are an Indian nutritionist. Return only valid JSON." },
+                { role: "user", content: aiTextPrompt }
             ],
             model: "llama-3.3-70b-versatile",
-            temperature: 0.9,
-            max_tokens: 4000,
+            temperature: 0.7,
+            max_tokens: 1500,
             response_format: { type: "json_object" }
         });
 
-        const jsonString = completion.choices[0]?.message?.content || "{}";
-        console.log("🥗 Groq Response Received");
+        const aiText = JSON.parse(completion.choices[0]?.message?.content || "{}");
 
-        let diet = JSON.parse(jsonString);
+        // Step 6: Assemble final plan — meals from DB, text from AI
+        const totalProtein = Object.values(meals)
+            .reduce((s, m) => s + parseFloat(m.protein), 0);
 
-        // Step 2: Post-process to FORCE correct totals (AI can't be trusted)
-        diet = normalizeMeals(diet, targets.calories, targets.protein);
+        const diet = {
+            summary: aiText.summary || `Indian ${userProfile.diet_type || 'Vegetarian'} Plan`,
+            strategy: aiText.strategy || { bullets: ['Eat on time', 'Stay hydrated', 'Track macros'], text: 'Focus on whole Indian foods.' },
+            macroTargets: {
+                cals: String(targets.calories),
+                protein: targets.protein + 'g',
+                logic: `Calculated using Mifflin-St Jeor BMR formula: ${targets.calories} kcal/day to support ${userProfile.goal} at your body weight.`
+            },
+            meals: {
+                breakfast: { name: meals.breakfast.name, cals: meals.breakfast.cals, protein: meals.breakfast.protein, purpose: meals.breakfast.purpose },
+                lunch:     { name: meals.lunch.name,     cals: meals.lunch.cals,     protein: meals.lunch.protein,     purpose: meals.lunch.purpose },
+                snack:     { name: meals.snack.name,     cals: meals.snack.cals,     protein: meals.snack.protein,     purpose: meals.snack.purpose },
+                dinner:    { name: meals.dinner.name,    cals: meals.dinner.cals,    protein: meals.dinner.protein,    purpose: meals.dinner.purpose }
+            },
+            trainingFuel: aiText.trainingFuel || { pre: 'Banana + 2 dates', post: 'Chaas + roasted chana' },
+            focusPoints: aiText.focusPoints || [],
+            supplements: Array.isArray(aiText.supplements) ? aiText.supplements.filter(s => typeof s === 'object' && s.name) : [],
+            reassurance: aiText.reassurance || 'Stay consistent with your Indian diet!',
+            disclaimer: 'MEDICAL DISCLAIMER: Consult a qualified healthcare professional before starting any new diet or supplement routine.'
+        };
 
-        console.log(`🥗 AI Diet ready: ${targets.calories} kcal, ${targets.protein}g protein ✓`);
+        const finalTotal = Object.values(diet.meals).reduce((s, m) => s + (parseInt(m.cals) || 0), 0);
+        console.log("Diet ready: " + finalTotal + " kcal (target: " + targets.calories + ") | meals from ICMR DB");
         return diet;
 
     } catch (error) {
-        console.error("🥗 AI Diet Error:", error.message);
-        throw new Error("Failed to generate diet with AI.");
+        console.error("Diet generation error:", error.message);
+        throw new Error("Failed to generate diet plan.");
     }
 };
 
