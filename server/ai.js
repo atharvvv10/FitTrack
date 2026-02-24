@@ -223,17 +223,10 @@ export const generateAIDiet = async (userProfile) => {
         // Step 1: Calculate exact targets from user profile
         const targets = calculateTargets(userProfile);
 
-        // ===== RANDOMIZE CUISINE & VIBE =====
-        const cuisines = [
-            'Mediterranean', 'Mexican', 'Indian', 'Japanese', 'Thai',
-            'African', 'Middle Eastern', 'Caribbean', 'Greek', 'Fusion',
-            'Soul Food', 'French', 'Korean', 'Street Food Style'
-        ];
-        const selectedCuisine = cuisines[Math.floor(Math.random() * cuisines.length)];
-        console.log(`👨‍🍳 Chef Vibe: ${selectedCuisine}`);
+        console.log(`🍛 Generating Indian Diet Plan...`);
 
         const prompt = `
-You are an elite AI Nutrition Coach. Generate a personalized daily diet plan.
+You are an expert Indian Nutritionist and Chef. Generate a personalized, AUTHENTIC INDIAN daily diet plan.
 
 USER PROFILE:
 - Goal: ${userProfile.goal || 'General Fitness'}
@@ -249,12 +242,28 @@ CALCULATED DAILY TARGETS (USE THESE EXACT NUMBERS):
 - Daily Calories: ${targets.calories} kcal
 - Daily Protein: ${targets.protein}g
 
+MEAL GENERATION RULES:
+1. ALL food must be traditional, common Indian meals eaten daily in Indian households.
+2. Use specific Indian food names (e.g., "Masala Oats Upma with Peanuts", "Moong Dal Chilla with Mint Chutney", "Rajma Chawal with Cucumber Raita", "Palak Paneer with 2 Whole Wheat Roti").
+3. If diet_type is "Vegetarian" or "Vegan", use ONLY plant-based Indian foods (dal, paneer if vegetarian, rajma, chana, tofu, soya, sprouts, etc.)
+4. If diet_type is "Non-Vegetarian", include Indian non-veg options like Chicken Curry, Egg Bhurji, Fish Curry, Mutton Dal, etc.
+5. Pre/Post workout fuels must also be Indian (e.g., "Banana + 2 dates", "Buttermilk", "Boiled Chana", "Egg Whites + Roti").
+6. Supplements should be practical and available in India.
+
+EXAMPLES OF GOOD INDIAN MEALS (use as inspiration, not exactly):
+- Breakfast: Besan Chilla, Masala Oats, Poha with peanuts, Moong Dal Dosa, Aloo Paratha with curd, Idli with Sambar, Upma, Egg Bhurji with toast
+- Lunch: Dal Tadka + Brown Rice, Rajma Chawal, Palak Paneer + Roti, Chole + Rice, Soya Bhurji + Roti, Chicken Curry + Rice, Mixed Veg Sabzi
+- Snacks: Roasted Chana, Sprouts Salad, Makhana, Boiled Eggs, Peanut Chikki, Fruit Chaat, Dhokla
+- Dinner: Moong Dal Khichdi, Paneer Bhurji + Roti, Tofu Sabzi, Egg Curry, Grilled Chicken + Dal Soup, Vegetable Curry + Roti
+
+VARIETY SEED: ${Date.now()}-${Math.random().toString(36).slice(2, 8)}
+
 RETURN ONLY valid JSON matching this EXACT schema (no markdown, no commentary):
 {
-    "summary": "string (e.g. 'Vegetarian Plan for Weight Loss')",
+    "summary": "string (e.g. 'Indian Vegetarian Plan for Muscle Gain')",
     "strategy": {
         "bullets": ["string", "string", "string"],
-        "text": "string (1-2 sentence paragraph about the strategy)"
+        "text": "string (1-2 sentence paragraph about the strategy with Indian dietary context)"
     },
     "macroTargets": {
         "cals": "${targets.calories}",
@@ -262,14 +271,14 @@ RETURN ONLY valid JSON matching this EXACT schema (no markdown, no commentary):
         "logic": "string (explain WHY these targets based on user's BMR, TDEE, and goal)"
     },
     "meals": {
-        "breakfast": { "name": "string (specific real food)", "cals": number, "protein": "string with g suffix", "purpose": "string" },
+        "breakfast": { "name": "string (specific real Indian food)", "cals": number, "protein": "string with g suffix", "purpose": "string" },
         "lunch": { "name": "string", "cals": number, "protein": "string with g suffix", "purpose": "string" },
         "snack": { "name": "string", "cals": number, "protein": "string with g suffix", "purpose": "string" },
         "dinner": { "name": "string", "cals": number, "protein": "string with g suffix", "purpose": "string" }
     },
     "trainingFuel": {
-        "pre": "string (pre-workout snack suggestion)",
-        "post": "string (post-workout recovery suggestion)"
+        "pre": "string (Indian pre-workout snack suggestion)",
+        "post": "string (Indian post-workout recovery suggestion)"
     },
     "focusPoints": [
         { "title": "string", "icon": "string (single emoji)", "desc": "string (detailed explanation)" },
@@ -278,24 +287,23 @@ RETURN ONLY valid JSON matching this EXACT schema (no markdown, no commentary):
         { "title": "string", "icon": "string", "desc": "string" }
     ],
     "supplements": [
-        "EXACTLY 3 items required",
-        { "name": "string", "dosage": "string (e.g. 5g, 1 tablet)", "context": "string (when/why to take)" }
+        { "name": "string", "dosage": "string (e.g. 5g, 1 tablet)", "context": "string (when/why to take)" },
+        { "name": "string", "dosage": "string", "context": "string" },
+        { "name": "string", "dosage": "string", "context": "string" }
     ],
-    "reassurance": "string (motivational paragraph)",
+    "reassurance": "string (motivational paragraph with Indian cultural references)",
     "disclaimer": "MEDICAL DISCLAIMER: Consult a qualified healthcare professional before starting any new diet or supplement routine. This guidance is for educational purposes only."
 }
 
 ABSOLUTE RULES:
 1. breakfast.cals + lunch.cals + snack.cals + dinner.cals MUST EQUAL EXACTLY ${targets.calories}.
 2. The sum of all protein values must equal exactly ${targets.protein}g.
-3. Use REAL, culturally appropriate foods matching the diet type.
+3. Use ONLY authentic Indian foods. No Western meals like sandwiches, salads, pasta etc.
 4. Respect allergies strictly.
 5. All "cals" must be plain numbers. All "protein" must be strings ending in "g".
 6. macroTargets.cals must be "${targets.calories}" and macroTargets.protein must be "${targets.protein}g".
-7. VARIETY IS CRITICAL: This specific plan MUST focus on ${selectedCuisine} cuisine flavors and cooking styles (where applicable for the diet type).
-8. Do NOT repeat generic meals. Be creative. Make it sound delicious.
-9. Random seed for this generation: ${Date.now()}-${Math.random().toString(36).slice(2, 8)}
-
+7. supplements array must have EXACTLY 3 items.
+8. Do NOT repeat generic meals. Make each meal sound distinct, delicious, and practical for Indian kitchens.
 `;
 
         // ===== GROQ (Llama 3) REQUEST =====
