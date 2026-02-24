@@ -216,154 +216,324 @@ function normalizeMeals(diet, targetCals, targetProtein) {
     return diet;
 }
 
+// ═══════════════════════════════════════════════════════════════════
+// PERFECT 2-STAGE DATASET-DRIVEN INDIAN DIET GENERATOR
+// Stage 1: Server pre-selects 5 goal-aware candidates per meal slot
+//           from full 1580-food DB
+// Stage 2: Groq AI picks the single best option from those 5 per slot
+//           (short list = AI actually respects it)
+// Stage 3: Server verifies AI's pick against DB, applies REAL macros
+//           (AI never sets a single calorie number)
+// ═══════════════════════════════════════════════════════════════════
 export const generateAIDiet = async (userProfile) => {
     try {
-        console.log("Generating dataset-driven Indian diet plan...");
+        console.log("🥗 Generating perfect dataset-driven Indian diet...");
 
-        // Step 1: Calculate exact calorie & protein targets
+        // ─── Step 1: Calculate exact targets ─────────────────────────
         const targets = calculateTargets(userProfile);
+        const goal = (userProfile.goal || 'General Fitness').toLowerCase();
         const isNonVeg = (userProfile.diet_type || '').toLowerCase().includes('non');
+        const dietType = isNonVeg ? 'non-vegetarian' : 'vegetarian';
 
-        // Step 2: Fetch verified Indian foods from ICMR_Curated
-        // These 43 foods are 100% Indian (hand-curated from ICMR-NIN tables)
-        const result = await pool.query(`
-            SELECT name, calories, protein_g, carbs_g, fat_g, fibre_g, food_group, diet_type
-            FROM food_items
-            WHERE source = 'ICMR_Curated'
-              AND calories BETWEEN 50 AND 800
-              AND (diet_type = $1 OR diet_type = 'vegetarian')
-            ORDER BY food_group, name
-        `, [isNonVeg ? 'non-vegetarian' : 'vegetarian']);
+        // Goal-based protein ratio preference for candidate ranking
+        //   Muscle Gain → maximise protein/cal ratio
+        //   Fat Loss    → maximise fibre, minimise cals
+        //   Endurance   → maximise carbs
+        //   Default     → balanced
+        const goalMode =
+            goal.includes('muscle') || goal.includes('gain') || goal.includes('bulk') ? 'muscle' :
+                goal.includes('fat') || goal.includes('loss') || goal.includes('cut') ? 'cut' :
+                    goal.includes('endur') || goal.includes('run') || goal.includes('cardio') ? 'endur' :
+                        'balance';
 
-        const foods = result.rows.map(f => ({
-            name: f.name,
-            cals: parseInt(f.calories),
-            pro: parseFloat(f.protein_g) || 0,
-            carbs: parseFloat(f.carbs_g) || 0,
-            fat: parseFloat(f.fat_g) || 0,
-            group: (f.food_group || '').toLowerCase()
-        }));
-
-        console.log("Loaded " + foods.length + " verified ICMR Indian foods");
-
-        // Step 3: Server-side meal selection by food_group
-        // Targets per meal: B=25%, L=35%, S=15%, D=25%
-        const mealTargets = {
-            breakfast: { calPct: 0.25, group: ['breakfast', 'cereals & grains', 'eggs', 'dairy', 'nuts & seeds'] },
-            lunch:     { calPct: 0.35, group: ['lunch/dinner', 'pulses & legumes', 'meat & seafood', 'soy products', 'cereals & grains'] },
-            snack:     { calPct: 0.15, group: ['snacks', 'fruits', 'nuts & seeds', 'beverages'] },
-            dinner:    { calPct: 0.25, group: ['lunch/dinner', 'pulses & legumes', 'soy products', 'meat & seafood'] }
+        // ─── Step 2: Define per-slot configs ─────────────────────────
+        // Each slot has: calorie %, allowed food groups, calorie window for candidates
+        const slots = {
+            breakfast: {
+                calPct: 0.25,
+                groups: ['breakfast', 'cereals & grains', 'eggs', 'dairy', 'bread & rotis'],
+                label: 'Breakfast'
+            },
+            lunch: {
+                calPct: 0.35,
+                groups: ['lunch/dinner', 'pulses & legumes', 'meat & poultry', 'fish & seafood', 'soy products', 'cereals & grains'],
+                label: 'Lunch'
+            },
+            snack: {
+                calPct: 0.15,
+                groups: ['snacks', 'fruits', 'nuts & seeds', 'beverages', 'sprouts'],
+                label: 'Snack'
+            },
+            dinner: {
+                calPct: 0.25,
+                groups: ['lunch/dinner', 'pulses & legumes', 'soy products', 'meat & poultry', 'fish & seafood', 'vegetables'],
+                label: 'Dinner'
+            }
         };
 
-        const usedNames = new Set();
-        const meals = {};
+        // ─── Step 3: For each slot, fetch goal-ranked candidates ─────
+        // SQL scores foods by how well they match the user's goal:
+        //   Muscle: protein/calorie ratio (high protein per kcal)
+        //   Cut:    fibre + low calorie density
+        //   Endur:  carb/calorie ratio
+        //   Balance: even all macros
+        const goalScoreSQL = {
+            muscle: `(protein_g::FLOAT / NULLIF(calories::FLOAT, 0)) * 100`,
+            cut: `(fibre_g::FLOAT * 2.0 + (1.0 / NULLIF(calories::FLOAT, 1.0)) * 500.0)`,
+            endur: `(carbs_g::FLOAT / NULLIF(calories::FLOAT, 0)) * 100`,
+            balance: `1` // equal weight → pure calorie proximity sort
+        };
+        const scoreExpr = goalScoreSQL[goalMode];
 
-        for (const [slot, config] of Object.entries(mealTargets)) {
-            const targetCals = Math.round(targets.calories * config.calPct);
+        const candidateSets = {};
 
-            // Pick best food for this slot from matching groups
-            const candidates = foods
-                .filter(f => !usedNames.has(f.name) && config.group.some(g => f.group.includes(g)))
-                .sort((a, b) => Math.abs(a.cals - targetCals) - Math.abs(b.cals - targetCals));
+        for (const [slot, cfg] of Object.entries(slots)) {
+            const slotTarget = Math.round(targets.calories * cfg.calPct);
+            // Accept foods within ±60% of slot target (multiplier will fine-tune)
+            const minCals = Math.round(slotTarget * 0.35);
+            const maxCals = Math.round(slotTarget * 1.8);
 
-            // Fallback: any unused food
-            const food = candidates[0] || foods.find(f => !usedNames.has(f.name)) || foods[0];
-            usedNames.add(food.name);
+            const groupList = cfg.groups.map(g => `'${g.toLowerCase()}'`).join(',');
 
-            // Calculate serving multiplier to hit target calories
-            const rawMultiplier = targetCals / food.cals;
-            const mult = Math.min(2.5, Math.max(0.5, Math.round(rawMultiplier * 4) / 4));
+            const q = await pool.query(`
+                SELECT name, calories, protein_g, carbs_g, fat_g, fibre_g, food_group
+                FROM food_items
+                WHERE calories BETWEEN $1 AND $2
+                  AND (diet_type = $3 OR diet_type = 'vegetarian')
+                  AND LOWER(food_group) = ANY(ARRAY[${groupList}])
+                  AND source IN ('ICMR_Curated', 'INDB_Kaggle')
+                  AND name NOT ILIKE '%tagine%' AND name NOT ILIKE '%shawarma%'
+                  AND name NOT ILIKE '%pasta%'  AND name NOT ILIKE '%pizza%'
+                  AND name NOT ILIKE '%burger%' AND name NOT ILIKE '%wrap%'
+                  AND name NOT ILIKE '%harissa%' AND name NOT ILIKE '%portobello%'
+                  AND name NOT ILIKE '%fajita%'  AND name NOT ILIKE '%hummus%'
+                  AND name NOT ILIKE '%lasagna%' AND name NOT ILIKE '%risotto%'
+                  AND name NOT ILIKE '%tiramisu%' AND name NOT ILIKE '%quiche%'
+                  AND name NOT ILIKE '%crepe%'   AND name NOT ILIKE '%baguette%'
+                  AND name NOT ILIKE '%burrito%' AND name NOT ILIKE '%sushi%'
+                  AND name NOT ILIKE '%miso%'    AND name NOT ILIKE '%falafel%'
+                  AND name NOT ILIKE '%(dry)%' AND name NOT ILIKE '% dry%'
+                  AND name NOT ILIKE '%(raw)%' AND name NOT ILIKE '% raw%'
+                  AND name NOT ILIKE '%(100g)%'
+                ORDER BY (${scoreExpr}) DESC,
+                         ABS(calories - $4) ASC
+                LIMIT 5
+            `, [minCals, maxCals, dietType, slotTarget]);
 
-            meals[slot] = {
-                name: food.name,
-                cals: Math.round(food.cals * mult),
-                protein: (Math.round(food.pro * mult * 10) / 10) + 'g',
-                purpose: food.group + ' — ' + Math.round(food.cals * mult) + ' kcal',
-                _rawCals: food.cals,
-                _mult: mult
-            };
+            // Fallback: ICMR_Curated only if INDB gave nothing
+            if (q.rows.length === 0) {
+                const fb = await pool.query(`
+                    SELECT name, calories, protein_g, carbs_g, fat_g, fibre_g, food_group
+                    FROM food_items
+                    WHERE source = 'ICMR_Curated'
+                      AND (diet_type = $1 OR diet_type = 'vegetarian')
+                    ORDER BY random() LIMIT 5
+                `, [dietType]);
+                q.rows = fb.rows;
+            }
+
+            candidateSets[slot] = q.rows.map(r => ({
+                name: r.name,
+                cals: parseInt(r.calories),
+                pro: parseFloat(r.protein_g) || 0,
+                carbs: parseFloat(r.carbs_g) || 0,
+                fat: parseFloat(r.fat_g) || 0,
+                fibre: parseFloat(r.fibre_g) || 0,
+                group: r.food_group
+            }));
+
+            console.log(`  ${cfg.label}: ${candidateSets[slot].length} candidates (target ${slotTarget} kcal, mode=${goalMode})`);
         }
 
-        // Step 4: Normalize total to match exact targets
-        const totalCalsBefore = Object.values(meals).reduce((s, m) => s + m.cals, 0);
-        const diff = targets.calories - totalCalsBefore;
-        // Apply calorie diff to dinner (largest meal)
-        meals.dinner.cals += diff;
-        const dinnerPro = parseFloat(meals.dinner.protein);
-        meals.dinner.protein = (Math.round((dinnerPro + diff * 0.1) * 10) / 10) + 'g';
+        // ─── Step 4: Send SHORT candidate lists to Groq ──────────────
+        // Each slot has ≤5 options — AI CAN actually pick from this!
+        const candidateSummary = {};
+        for (const [slot, items] of Object.entries(candidateSets)) {
+            candidateSummary[slot] = items.map((f, i) =>
+                `${i + 1}. "${f.name}" — ${f.cals} kcal, ${f.pro}g protein, ${f.carbs}g carbs, ${f.fat}g fat`
+            ).join('\n');
+        }
 
-        // Step 5: Ask AI ONLY for text content (strategy, supplements, motivational text)
-        // AI cannot invent food — meals are already set from real DB
-        const aiTextPrompt = `You are an expert Indian nutritionist. Write advisory content for this diet plan.
+        const selectionPrompt = `You are an expert Indian sports nutritionist. Pick the BEST meal for each slot from the numbered options below.
 
-USER: ${userProfile.goal || 'Fitness'} goal | ${userProfile.diet_type || 'Vegetarian'} | ${userProfile.weight}kg | ${userProfile.gender || 'Male'} | ${userProfile.level || 'Beginner'}
-TARGETS: ${targets.calories} kcal/day | ${targets.protein}g protein/day
-MEALS: Breakfast: ${meals.breakfast.name}, Lunch: ${meals.lunch.name}, Snack: ${meals.snack.name}, Dinner: ${meals.dinner.name}
+USER PROFILE:
+- Goal: ${userProfile.goal} | Diet: ${userProfile.diet_type}
+- Weight: ${userProfile.weight}kg | Age: ${userProfile.age} | Gender: ${userProfile.gender}
+- Fitness Level: ${userProfile.level}
+- Allergies: ${JSON.stringify(userProfile.allergies || ['None'])}
 
-Return ONLY this JSON:
+DAILY TARGETS (Mifflin-St Jeor BMR, goal-adjusted):
+- Calories: ${targets.calories} kcal
+- Protein: ${targets.protein}g
+
+BREAKFAST OPTIONS (pick 1):
+${candidateSummary.breakfast}
+
+LUNCH OPTIONS (pick 1):
+${candidateSummary.lunch}
+
+SNACK OPTIONS (pick 1):
+${candidateSummary.snack}
+
+DINNER OPTIONS (pick 1):
+${candidateSummary.dinner}
+
+Pick the best option for the user's ${userProfile.goal} goal. For each slot also suggest a serving_multiplier (0.5–2.5) to help hit the calorie targets.
+
+Return ONLY this JSON — use the EXACT food name from the numbered options:
 {
-    "summary": "Indian ${userProfile.diet_type || 'Vegetarian'} Plan for ${userProfile.goal || 'Fitness'}",
+    "selections": {
+        "breakfast": { "name": "EXACT name from breakfast list", "serving_multiplier": 1.0 },
+        "lunch":     { "name": "EXACT name from lunch list",      "serving_multiplier": 1.0 },
+        "snack":     { "name": "EXACT name from snack list",      "serving_multiplier": 1.0 },
+        "dinner":    { "name": "EXACT name from dinner list",     "serving_multiplier": 1.0 }
+    },
+    "summary": "Indian ${userProfile.diet_type} Plan for ${userProfile.goal}",
     "strategy": {
-        "bullets": ["tip about timing", "tip about portions", "tip about hydration"],
-        "text": "1-2 sentences explaining why these meals suit the user's goal"
+        "bullets": ["Specific timing tip", "Specific portion tip", "Specific hydration/recovery tip"],
+        "text": "2 sentences explaining why these meals are perfect for the user's ${userProfile.goal} goal."
     },
     "trainingFuel": {
-        "pre": "Indian pre-workout snack (e.g. banana + dates, roasted chana)",
-        "post": "Indian post-workout recovery (e.g. chaas + chana, egg bhurji)"
+        "pre":  "Specific Indian pre-workout food (name it, e.g. 'Banana + 5 soaked almonds + 1 tsp honey')",
+        "post": "Specific Indian post-workout recovery (name it, e.g. 'Chaas + 30g roasted chana + 2 boiled eggs')"
     },
     "focusPoints": [
-        {"title": "string", "icon": "emoji", "desc": "string"},
-        {"title": "string", "icon": "emoji", "desc": "string"},
-        {"title": "string", "icon": "emoji", "desc": "string"}
+        { "title": "string", "icon": "emoji", "desc": "specific actionable advice" },
+        { "title": "string", "icon": "emoji", "desc": "specific actionable advice" },
+        { "title": "string", "icon": "emoji", "desc": "specific actionable advice" }
     ],
     "supplements": [
-        {"name": "string", "dosage": "string", "context": "when/why"},
-        {"name": "string", "dosage": "string", "context": "when/why"},
-        {"name": "string", "dosage": "string", "context": "when/why"}
+        { "name": "supplement name", "dosage": "exact dose + timing", "context": "why for this goal" },
+        { "name": "supplement name", "dosage": "exact dose + timing", "context": "why for this goal" },
+        { "name": "supplement name", "dosage": "exact dose + timing", "context": "why for this goal" }
     ],
-    "reassurance": "2 sentence motivational message with Indian cultural references"
+    "reassurance": "2 motivational sentences with Indian cultural flavour (mention a famous Indian food/practice)"
 }`;
 
+        console.log("🤖 Sending candidate selections to Groq...");
         const completion = await groqDiet.chat.completions.create({
             messages: [
-                { role: "system", content: "You are an Indian nutritionist. Return only valid JSON." },
-                { role: "user", content: aiTextPrompt }
+                { role: "system", content: "You are a professional Indian nutritionist. Output ONLY valid JSON. Pick foods ONLY from the provided numbered lists — copy the name exactly." },
+                { role: "user", content: selectionPrompt }
             ],
             model: "llama-3.3-70b-versatile",
-            temperature: 0.7,
-            max_tokens: 1500,
+            temperature: 0.5,
+            max_tokens: 2000,
             response_format: { type: "json_object" }
         });
 
-        const aiText = JSON.parse(completion.choices[0]?.message?.content || "{}");
+        const aiResponse = JSON.parse(completion.choices[0]?.message?.content || "{}");
+        const aiSelections = aiResponse.selections || {};
 
-        // Step 6: Assemble final plan — meals from DB, text from AI
-        const totalProtein = Object.values(meals)
-            .reduce((s, m) => s + parseFloat(m.protein), 0);
+        // ─── Step 5: Verify AI picks & look up REAL macros from DB ───
+        const meals = {};
+        const slotTargets = {
+            breakfast: Math.round(targets.calories * 0.25),
+            lunch: Math.round(targets.calories * 0.35),
+            snack: Math.round(targets.calories * 0.15),
+            dinner: Math.round(targets.calories * 0.25)
+        };
+
+        for (const slot of ['breakfast', 'lunch', 'snack', 'dinner']) {
+            const aiPick = aiSelections[slot] || {};
+            const rawMult = parseFloat(aiPick.serving_multiplier) || 1.0;
+            const mult = Math.min(2.5, Math.max(0.5, rawMult));
+
+            // Find AI's pick in the candidate set (exact or close match)
+            const candidates = candidateSets[slot];
+            let food = candidates.find(f =>
+                f.name.toLowerCase() === (aiPick.name || '').toLowerCase()
+            );
+
+            // If AI hallucinated a name, fall back to the best candidate
+            if (!food) {
+                console.warn(`⚠️  [${slot}] AI picked "${aiPick.name}" (not in list) → using best candidate`);
+                food = candidates[0] || { name: 'Dal Tadka with Rice', cals: 300, pro: 12, carbs: 50, fat: 5, group: 'Lunch/Dinner' };
+            }
+
+            // Calculate final serving multiplier to hit EXACT slot target
+            const optimalMult = Math.round((slotTargets[slot] / food.cals) * 4) / 4;
+            // Use AI's mult if it's reasonable; otherwise use optimal
+            const finalMult = (Math.abs(mult - optimalMult) < 0.75) ? mult : optimalMult;
+            const clampedMult = Math.min(2.5, Math.max(0.5, finalMult));
+
+            const finalCals = Math.round(food.cals * clampedMult);
+            const finalProtein = Math.round(food.pro * clampedMult * 10) / 10;
+            const finalCarbs = Math.round(food.carbs * clampedMult * 10) / 10;
+            const finalFat = Math.round(food.fat * clampedMult * 10) / 10;
+
+            const portionNote = clampedMult !== 1.0 ? ` (×${clampedMult} serving)` : '';
+            meals[slot] = {
+                name: food.name + portionNote,
+                cals: finalCals,
+                protein: finalProtein + 'g',
+                carbs: finalCarbs + 'g',
+                fat: finalFat + 'g',
+                purpose: `${food.group} — ${finalCals} kcal | ${finalProtein}g protein | ${finalCarbs}g carbs | ${finalFat}g fat`,
+                _food: food,
+                _mult: clampedMult
+            };
+        }
+
+        // ─── Step 6: Precision normalization ─────────────────────────
+        // Make total cals equal targets.calories EXACTLY
+        let totalCals = Object.values(meals).reduce((s, m) => s + m.cals, 0);
+        let remainder = targets.calories - totalCals;
+
+        // Distribute remainder across meals proportionally (largest adjustment to dinner)
+        if (remainder !== 0) {
+            meals.dinner.cals += remainder;
+            // Recompute dinner protein/carbs/fat based on new cals
+            const dMult = meals.dinner._mult * (meals.dinner.cals / (meals.dinner._food.cals * meals.dinner._mult));
+            meals.dinner.protein = (Math.round(meals.dinner._food.pro * dMult * 10) / 10) + 'g';
+            meals.dinner.carbs = (Math.round(meals.dinner._food.carbs * dMult * 10) / 10) + 'g';
+            meals.dinner.fat = (Math.round(meals.dinner._food.fat * dMult * 10) / 10) + 'g';
+            meals.dinner.purpose = `${meals.dinner._food.group} — ${meals.dinner.cals} kcal | ${meals.dinner.protein} protein`;
+        }
+
+        // ─── Step 7: Assemble final perfect diet plan ─────────────────
+        const totalProtein = Object.values(meals).reduce((s, m) => s + parseFloat(m.protein), 0);
+        const finalTotal = Object.values(meals).reduce((s, m) => s + (m.cals || 0), 0);
+
+        const cleanMeals = {};
+        for (const [slot, m] of Object.entries(meals)) {
+            cleanMeals[slot] = {
+                name: m.name,
+                cals: m.cals,
+                protein: m.protein,
+                carbs: m.carbs,
+                fat: m.fat,
+                purpose: m.purpose
+            };
+        }
 
         const diet = {
-            summary: aiText.summary || `Indian ${userProfile.diet_type || 'Vegetarian'} Plan`,
-            strategy: aiText.strategy || { bullets: ['Eat on time', 'Stay hydrated', 'Track macros'], text: 'Focus on whole Indian foods.' },
+            summary: aiResponse.summary || `Indian ${userProfile.diet_type} Plan for ${userProfile.goal}`,
+            strategy: aiResponse.strategy || {
+                bullets: ['Eat meals at fixed times', 'Hydrate with 3L water', 'Prioritise protein at every meal'],
+                text: `This plan is optimised for ${userProfile.goal} using real Indian foods from ICMR-NIN nutritional data.`
+            },
             macroTargets: {
                 cals: String(targets.calories),
                 protein: targets.protein + 'g',
-                logic: `Calculated using Mifflin-St Jeor BMR formula: ${targets.calories} kcal/day to support ${userProfile.goal} at your body weight.`
+                carbs: Math.round(targets.calories * 0.45 / 4) + 'g',
+                fat: Math.round(targets.calories * 0.25 / 9) + 'g',
+                logic: `Mifflin-St Jeor BMR × TDEE activity multiplier, adjusted for ${userProfile.goal}. Protein set at ${targets.protein}g (2.0g/kg lean mass) for ${goalMode} goal. Macros: 30% protein / 45% carbs / 25% fat.`
             },
-            meals: {
-                breakfast: { name: meals.breakfast.name, cals: meals.breakfast.cals, protein: meals.breakfast.protein, purpose: meals.breakfast.purpose },
-                lunch:     { name: meals.lunch.name,     cals: meals.lunch.cals,     protein: meals.lunch.protein,     purpose: meals.lunch.purpose },
-                snack:     { name: meals.snack.name,     cals: meals.snack.cals,     protein: meals.snack.protein,     purpose: meals.snack.purpose },
-                dinner:    { name: meals.dinner.name,    cals: meals.dinner.cals,    protein: meals.dinner.protein,    purpose: meals.dinner.purpose }
+            meals: cleanMeals,
+            trainingFuel: aiResponse.trainingFuel || {
+                pre: 'Banana + 5 soaked almonds + 1 tsp honey (30 min before)',
+                post: 'Chaas (buttermilk) + 30g roasted chana within 30 min of training'
             },
-            trainingFuel: aiText.trainingFuel || { pre: 'Banana + 2 dates', post: 'Chaas + roasted chana' },
-            focusPoints: aiText.focusPoints || [],
-            supplements: Array.isArray(aiText.supplements) ? aiText.supplements.filter(s => typeof s === 'object' && s.name) : [],
-            reassurance: aiText.reassurance || 'Stay consistent with your Indian diet!',
+            focusPoints: Array.isArray(aiResponse.focusPoints) ? aiResponse.focusPoints : [],
+            supplements: Array.isArray(aiResponse.supplements)
+                ? aiResponse.supplements.filter(s => typeof s === 'object' && s.name)
+                : [],
+            reassurance: aiResponse.reassurance || 'Stay consistent — every roti counts! Your goal is achievable.',
             disclaimer: 'MEDICAL DISCLAIMER: Consult a qualified healthcare professional before starting any new diet or supplement routine.'
         };
 
-        const finalTotal = Object.values(diet.meals).reduce((s, m) => s + (parseInt(m.cals) || 0), 0);
-        console.log("Diet ready: " + finalTotal + " kcal (target: " + targets.calories + ") | meals from ICMR DB");
+        console.log(`✅ Perfect diet: ${finalTotal} kcal (target ${targets.calories}) | ${totalProtein.toFixed(1)}g protein | ${Object.keys(cleanMeals).map(s => cleanMeals[s].name.split(' (')[0]).join(', ')}`);
         return diet;
 
     } catch (error) {
@@ -371,5 +541,4 @@ Return ONLY this JSON:
         throw new Error("Failed to generate diet plan.");
     }
 };
-
 console.log("AI Service Loaded. Workout Key:", !!process.env.GEMINI_API_KEY, "| Diet Key:", !!process.env.GEMINI_DIET_API_KEY);
