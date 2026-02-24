@@ -1,4 +1,4 @@
-
+﻿
 import React, { useState, useEffect } from 'react';
 import { auth } from '../lib/firebase'; // Import Firebase Auth
 import { onAuthStateChanged } from 'firebase/auth';
@@ -182,8 +182,9 @@ const Diet = ({ diet, context, onDayComplete }) => {
     };
 
     // ===== COMPUTED PROGRESS =====
-    const mealSlots = ['breakfast', 'lunch', 'snack', 'dinner'];
-    const totalMeals = 4;
+    // Dynamic meal slots — supports 3, 4, 5, or 6 meals per phase
+    const mealSlots = diet?.meals ? Object.keys(diet.meals) : ['breakfast', 'lunch', 'snack', 'dinner'];
+    const totalMeals = mealSlots.length;
     const eatenCount = mealSlots.filter(k => eatenMeals[k]).length;
     const progressPercent = (eatenCount / totalMeals) * 100;
 
@@ -212,7 +213,7 @@ const Diet = ({ diet, context, onDayComplete }) => {
         return sum;
     }, 0);
 
-    const allComplete = eatenCount >= 4;
+    const allComplete = eatenCount >= totalMeals;
     const suppCount = Array.isArray(diet?.supplements) ? diet.supplements.length : 0;
     const takenSuppCount = Object.keys(takenSupps).length;
     const allSuppsComplete = suppCount > 0 ? takenSuppCount >= suppCount : true;
@@ -365,10 +366,23 @@ const Diet = ({ diet, context, onDayComplete }) => {
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                     <div>
                         <h1 style={{ fontSize: '2.5rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.02em' }}>Diet & Nutrition</h1>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px', flexWrap: 'wrap' }}>
                             <span style={{ fontSize: '0.95rem', color: '#888' }}>Personalized Strategy</span>
                             <span style={{ width: '4px', height: '4px', background: '#444', borderRadius: '50%' }}></span>
-                            <div style={{ display: 'flex', gap: '8px' }}>
+                            <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                                {/* Phase label badge */}
+                                {diet?.phaseLabel && (
+                                    <span style={{
+                                        background: 'linear-gradient(135deg, rgba(187,134,252,0.15), rgba(156,39,176,0.1))',
+                                        color: '#BB86FC',
+                                        padding: '4px 12px',
+                                        borderRadius: '20px',
+                                        fontSize: '0.75rem',
+                                        fontWeight: '700',
+                                        letterSpacing: '0.3px',
+                                        border: '1px solid rgba(187,134,252,0.3)'
+                                    }}>{diet.phaseEmoji} {diet.phaseLabel}</span>
+                                )}
                                 <span style={{
                                     background: accentGlow,
                                     color: accent,
@@ -387,6 +401,17 @@ const Diet = ({ diet, context, onDayComplete }) => {
                                         borderRadius: '20px',
                                         fontSize: '0.75rem'
                                     }}>{context.diet_type}</span>
+                                )}
+                                {/* Meal count badge */}
+                                {diet?.mealCount && (
+                                    <span style={{
+                                        background: 'rgba(255,255,255,0.05)',
+                                        border: '1px solid rgba(255,255,255,0.08)',
+                                        color: '#888',
+                                        padding: '4px 10px',
+                                        borderRadius: '20px',
+                                        fontSize: '0.72rem'
+                                    }}>{diet.mealCount} meals/day</span>
                                 )}
                             </div>
                         </div>
@@ -476,125 +501,129 @@ const Diet = ({ diet, context, onDayComplete }) => {
                 )}
             </div>
 
+            {/* Safety Note Banner */}
+            {diet?.safetyNote && (
+                <div style={{
+                    background: 'rgba(255, 152, 0, 0.08)',
+                    border: '1px solid rgba(255, 152, 0, 0.3)',
+                    borderRadius: '12px', padding: '16px 20px',
+                    marginBottom: '32px', display: 'flex', alignItems: 'center', gap: '12px'
+                }}>
+                    <span style={{ fontSize: '1.2rem' }}>⚠️</span>
+                    <span style={{ fontSize: '0.9rem', color: '#FFB74D', fontWeight: '500' }}>{diet.safetyNote}</span>
+                </div>
+            )}
+
             {/* 5. DAILY PROTOCOL — WITH MARK AS EATEN */}
             <div style={{ marginBottom: '64px' }}>
                 <h4 style={{ fontSize: '0.85rem', color: '#666', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '24px', fontWeight: '600' }}>Daily Protocol</h4>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                    {[
-                        { type: 'Breakfast', key: 'breakfast', color: '#FFB74D', icon: '🌅' },
-                        { type: 'Lunch', key: 'lunch', color: '#81C784', icon: '☀️' },
-                        { type: 'Pre-Workout', key: 'snack', color: '#FF8A65', icon: '⚡' },
-                        { type: 'Dinner', key: 'dinner', color: '#4DB6AC', icon: '🌙' }
-                    ].map((slot) => {
-                        const meal = meals?.[slot.key];
-                        if (!meal) return null;
+                    {(() => {
+                        const SLOT_META = {
+                            breakfast: { color: '#FFB74D', icon: '🌅' },
+                            mid_morning: { color: '#F48FB1', icon: '🍎' },
+                            lunch: { color: '#81C784', icon: '☀️' },
+                            snack: { color: '#FF8A65', icon: '⚡' },
+                            dinner: { color: '#4DB6AC', icon: '🌙' },
+                            bedtime: { color: '#9575CD', icon: '🌛' }
+                        };
 
-                        const isEaten = eatenMeals[slot.key];
-                        const isAnimating = animatingMeal === slot.key;
+                        return Object.entries(meals || {}).map(([key, meal]) => {
+                            const meta = SLOT_META[key] || { color: '#BB86FC', icon: '🍽️' };
+                            const slotLabel = meal.label || key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
 
-                        return (
-                            <div key={slot.key} style={{
-                                display: 'grid',
-                                gridTemplateColumns: 'minmax(140px, 15%) 1fr auto',
-                                gap: '24px',
-                                alignItems: 'start',
-                                background: isEaten ? 'rgba(76, 175, 80, 0.04)' : '#161616',
-                                border: `1px solid ${isEaten ? 'rgba(76, 175, 80, 0.2)' : '#222'} `,
-                                borderRadius: '16px',
-                                padding: '32px',
-                                transition: 'all 0.4s ease',
-                                transform: isAnimating ? 'scale(1.01)' : 'scale(1)',
-                                opacity: isEaten ? 0.85 : 1
-                            }}>
-                                {/* Time/Type */}
-                                <div style={{ fontSize: '0.9rem', color: '#888', fontWeight: '500', display: 'flex', alignItems: 'center', paddingTop: '4px' }}>
-                                    <span style={{
-                                        width: '8px', height: '8px', borderRadius: '50%',
-                                        background: isEaten ? '#4CAF50' : slot.color,
-                                        marginRight: '12px',
-                                        boxShadow: `0 0 8px ${isEaten ? '#4CAF50' : slot.color} `
-                                    }}></span>
-                                    <span>{slot.icon} {slot.type}</span>
-                                </div>
+                            const isEaten = eatenMeals[key];
+                            const isAnimating = animatingMeal === key;
 
-                                {/* Content */}
-                                <div>
-                                    <div style={{
-                                        fontSize: '1.25rem', fontWeight: '700',
-                                        color: isEaten ? '#4CAF50' : '#fff',
-                                        marginBottom: '8px', letterSpacing: '-0.01em',
-                                        textDecoration: isEaten ? 'line-through' : 'none',
-                                        textDecorationColor: 'rgba(76,175,80,0.4)'
-                                    }}>
-                                        {isEaten && <span style={{ marginRight: '8px' }}>✓</span>}
-                                        {meal.name}
-                                    </div>
-                                    <div style={{ fontSize: '0.9rem', color: '#888', lineHeight: '1.6', paddingLeft: '12px', borderLeft: '2px solid #333' }}>
-                                        {meal.purpose}
-                                    </div>
-                                </div>
-
-                                {/* Right: Macros + Button */}
-                                <div style={{ textAlign: 'right', minWidth: '120px', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '16px' }}>
-                                    <div>
-                                        <div style={{ fontSize: '1rem', color: '#eee', fontWeight: '700', marginBottom: '4px' }}>{meal.cals}</div>
-                                        <div style={{ fontSize: '0.85rem', color: '#666' }}>kcal</div>
-                                        <div style={{ fontSize: '1rem', color: '#eee', fontWeight: '700', marginTop: '12px', marginBottom: '4px' }}>{meal.protein}</div>
-                                        <div style={{ fontSize: '0.85rem', color: '#666' }}>Pro</div>
-                                    </div>
-
-                                    {/* MARK AS EATEN CHECKBOX */}
-                                    {/* MARK AS EATEN CHECKBOX */}
-                                    <button
-                                        onClick={() => toggleMeal(slot.key, meal)}
-                                        style={{
-                                            background: isEaten ? 'rgba(76,175,80,0.1)' : 'rgba(255,255,255,0.04)',
-                                            color: isEaten ? '#4CAF50' : '#aaa',
-                                            border: `1.5px solid ${isEaten ? 'rgba(76,175,80,0.3)' : '#333'} `,
-                                            padding: '8px 16px',
-                                            borderRadius: '10px',
-                                            fontSize: '0.8rem',
-                                            fontWeight: '600',
-                                            cursor: 'pointer',
-                                            transition: 'all 0.25s ease',
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            gap: '8px',
-                                            whiteSpace: 'nowrap',
-                                            transform: isAnimating ? 'scale(1.05)' : 'scale(1)'
-                                        }}
-                                        onMouseOver={(e) => {
-                                            if (isEaten) {
-                                                e.currentTarget.style.borderColor = '#ff4444';
-                                                e.currentTarget.style.color = '#ff4444';
-                                            }
-                                        }}
-                                        onMouseOut={(e) => {
-                                            if (isEaten) {
-                                                e.currentTarget.style.borderColor = 'rgba(76,175,80,0.3)';
-                                                e.currentTarget.style.color = '#4CAF50';
-                                            }
-                                        }}
-                                    >
+                            return (
+                                <div key={key} style={{
+                                    display: 'grid',
+                                    gridTemplateColumns: 'minmax(140px, 15%) 1fr auto',
+                                    gap: '24px',
+                                    alignItems: 'start',
+                                    background: isEaten ? 'rgba(76, 175, 80, 0.04)' : '#161616',
+                                    border: `1px solid ${isEaten ? 'rgba(76, 175, 80, 0.2)' : '#222'}`,
+                                    borderRadius: '16px',
+                                    padding: '32px',
+                                    transition: 'all 0.4s ease',
+                                    transform: isAnimating ? 'scale(1.01)' : 'scale(1)',
+                                    opacity: isEaten ? 0.85 : 1
+                                }}>
+                                    {/* Time/Type */}
+                                    <div style={{ fontSize: '0.9rem', color: '#888', fontWeight: '500', display: 'flex', alignItems: 'center', paddingTop: '4px' }}>
                                         <span style={{
-                                            width: '18px', height: '18px', borderRadius: '5px',
-                                            border: `2px solid ${isEaten ? '#4CAF50' : '#555'} `,
-                                            background: isEaten ? '#4CAF50' : 'transparent',
-                                            display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                            fontSize: '0.7rem', color: '#fff', flexShrink: 0, transition: 'all 0.25s ease'
-                                        }}>{isEaten ? '✓' : ''}</span>
-                                        {isEaten ? 'Eaten' : '🍽 Mark Eaten'}
-                                    </button>
+                                            width: '8px', height: '8px', borderRadius: '50%',
+                                            background: isEaten ? '#4CAF50' : meta.color,
+                                            marginRight: '12px',
+                                            boxShadow: `0 0 8px ${isEaten ? '#4CAF50' : meta.color}`
+                                        }}></span>
+                                        <span>{meta.icon} {slotLabel}</span>
+                                    </div>
+
+                                    {/* Content */}
+                                    <div>
+                                        <div style={{
+                                            fontSize: '1.25rem', fontWeight: '700',
+                                            color: isEaten ? '#4CAF50' : '#fff',
+                                            marginBottom: '8px', letterSpacing: '-0.01em',
+                                            textDecoration: isEaten ? 'line-through' : 'none',
+                                            textDecorationColor: 'rgba(76,175,80,0.4)'
+                                        }}>
+                                            {isEaten && <span style={{ marginRight: '8px' }}>✓</span>}
+                                            {meal.name}
+                                        </div>
+                                        <div style={{ fontSize: '0.9rem', color: '#888', lineHeight: '1.6', paddingLeft: '12px', borderLeft: '2px solid #333' }}>
+                                            {meal.purpose}
+                                        </div>
+                                    </div>
+
+                                    {/* Right: Macros + Button */}
+                                    <div style={{ textAlign: 'right', minWidth: '120px', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '16px' }}>
+                                        <div>
+                                            <div style={{ fontSize: '1rem', color: '#eee', fontWeight: '700', marginBottom: '4px' }}>{meal.cals}</div>
+                                            <div style={{ fontSize: '0.85rem', color: '#666' }}>kcal</div>
+                                            <div style={{ fontSize: '1rem', color: '#eee', fontWeight: '700', marginTop: '12px', marginBottom: '4px' }}>{meal.protein}</div>
+                                            <div style={{ fontSize: '0.85rem', color: '#666' }}>Protein</div>
+                                        </div>
+
+                                        {/* MARK AS EATEN */}
+                                        <button
+                                            onClick={() => toggleMeal(key, meal)}
+                                            style={{
+                                                background: isEaten ? 'rgba(76,175,80,0.1)' : 'rgba(255,255,255,0.04)',
+                                                color: isEaten ? '#4CAF50' : '#aaa',
+                                                border: `1.5px solid ${isEaten ? 'rgba(76,175,80,0.3)' : '#333'}`,
+                                                padding: '8px 16px', borderRadius: '10px',
+                                                fontSize: '0.8rem', fontWeight: '600', cursor: 'pointer',
+                                                transition: 'all 0.25s ease', display: 'flex',
+                                                alignItems: 'center', gap: '8px', whiteSpace: 'nowrap',
+                                                transform: isAnimating ? 'scale(1.05)' : 'scale(1)'
+                                            }}
+                                            onMouseOver={(e) => { if (isEaten) { e.currentTarget.style.borderColor = '#ff4444'; e.currentTarget.style.color = '#ff4444'; } }}
+                                            onMouseOut={(e) => { if (isEaten) { e.currentTarget.style.borderColor = 'rgba(76,175,80,0.3)'; e.currentTarget.style.color = '#4CAF50'; } }}
+                                        >
+                                            <span style={{
+                                                width: '18px', height: '18px', borderRadius: '5px',
+                                                border: `2px solid ${isEaten ? '#4CAF50' : '#555'}`,
+                                                background: isEaten ? '#4CAF50' : 'transparent',
+                                                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                                fontSize: '0.7rem', color: '#fff', flexShrink: 0, transition: 'all 0.25s ease'
+                                            }}>{isEaten ? '✓' : ''}</span>
+                                            {isEaten ? 'Eaten' : '🍽 Mark Eaten'}
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                        );
-                    })}
+                            );
+                        });
+                    })()}
                 </div>
 
             </div>
 
-            {/* 6. SYSTEM LOGIC */}
-            <div style={{ marginBottom: '80px' }}>
+
+
+    {/* 6. SYSTEM LOGIC */ }
+    <div style={{ marginBottom: '80px' }}>
                 <h4 style={{ fontSize: '0.85rem', color: '#666', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '32px', fontWeight: '600' }}>How This Plan Works</h4>
                 <div className="grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '40px' }}>
                     {Array.isArray(focusPoints) && focusPoints.map((point, idx) => (
@@ -614,10 +643,10 @@ const Diet = ({ diet, context, onDayComplete }) => {
                         </div>
                     ))}
                 </div>
-            </div>
+            </div >
 
-            {/* 7. SUPPLEMENTS */}
-            <div style={{ marginBottom: '80px' }}>
+    {/* 7. SUPPLEMENTS */ }
+    < div style = {{ marginBottom: '80px' }}>
                 <div style={{ marginBottom: '24px' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
                         <span style={{ fontSize: '0.85rem', color: '#666', textTransform: 'uppercase', letterSpacing: '1.5px', fontWeight: '600' }}>Supplements</span>
@@ -689,20 +718,20 @@ const Diet = ({ diet, context, onDayComplete }) => {
                         );
                     })}
                 </div>
-            </div>
+            </div >
 
-            {/* 8. FOOTER */}
-            <div style={{
-                borderTop: '1px solid #222',
-                paddingTop: '32px',
-                display: 'flex',
+    {/* 8. FOOTER */ }
+    < div style = {{
+    borderTop: '1px solid #222',
+        paddingTop: '32px',
+            display: 'flex',
                 flexDirection: 'column',
-                alignItems: 'center'
-            }}>
-                <p style={{ fontSize: '0.75rem', color: '#444', maxWidth: '500px', lineHeight: '1.5', textAlign: 'center' }}>
-                    {disclaimer ? disclaimer.replace("MEDICAL DISCLAIMER: ", "") : "Consult a qualified healthcare professional before starting any new diet."}
-                </p>
-            </div>
+                    alignItems: 'center'
+}}>
+    <p style={{ fontSize: '0.75rem', color: '#444', maxWidth: '500px', lineHeight: '1.5', textAlign: 'center' }}>
+        {disclaimer ? disclaimer.replace("MEDICAL DISCLAIMER: ", "") : "Consult a qualified healthcare professional before starting any new diet."}
+    </p>
+            </div >
         </div >
     );
 };

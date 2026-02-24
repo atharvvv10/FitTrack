@@ -7,74 +7,42 @@ const SERVER = 'http://localhost:3000';
 
 console.log('\n🍛 Testing Dataset-Driven Indian Diet API...\n');
 
-const userProfile = {
-    goal: 'Muscle Gain',
-    diet_type: 'Vegetarian',
-    weight: '72',
-    height: '175',
-    age: '22',
-    gender: 'Male',
-    level: 'Intermediate'
-};
+const profiles = [
+    { name: 'Underweight Muscle', goal: 'Muscle Gain', weight: '52', height: '175', age: '22', gender: 'Male' },
+    { name: 'Normal Muscle (Lean Muscle)', goal: 'Muscle Gain', weight: '72', height: '175', age: '22', gender: 'Male' },
+    { name: 'Overweight Fat Loss', goal: 'Fat Loss', weight: '88', height: '175', age: '30', gender: 'Male' },
+    { name: 'Obese Aggressive Cut', goal: 'Fat Loss', weight: '110', height: '175', age: '35', gender: 'Male' },
+    { name: 'Severe Underweight Safety', goal: 'General Fitness', weight: '45', height: '175', age: '20', gender: 'Female' }
+];
 
-const start = Date.now();
+for (const profile of profiles) {
+    console.log(`\n🏃 TEST PROFILE: ${profile.name}`);
+    console.log(`- Goal: ${profile.goal} | Weight: ${profile.weight}kg | Height: ${profile.height}cm`);
 
-try {
-    const res = await fetch(`${SERVER}/api/generate-ai-diet`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(userProfile)
-    });
-
-    if (!res.ok) {
-        const err = await res.text();
-        console.error('❌ Request failed:', res.status, err);
-        process.exit(1);
-    }
-
-    const diet = await res.json();
-    const elapsed = Date.now() - start;
-
-    console.log(`✅ Response in ${elapsed}ms\n`);
-    console.log('='.repeat(50));
-    console.log(`📋 Summary: ${diet.summary}`);
-    console.log(`🎯 Targets: ${diet.macroTargets?.cals} kcal | ${diet.macroTargets?.protein} protein`);
-    console.log('');
-    console.log(`🌅 Breakfast: ${diet.meals?.breakfast?.name}`);
-    console.log(`   ${diet.meals?.breakfast?.cals} kcal | ${diet.meals?.breakfast?.protein}`);
-    console.log('');
-    console.log(`☀️  Lunch:     ${diet.meals?.lunch?.name}`);
-    console.log(`   ${diet.meals?.lunch?.cals} kcal | ${diet.meals?.lunch?.protein}`);
-    console.log('');
-    console.log(`🍎 Snack:     ${diet.meals?.snack?.name}`);
-    console.log(`   ${diet.meals?.snack?.cals} kcal | ${diet.meals?.snack?.protein}`);
-    console.log('');
-    console.log(`🌙 Dinner:    ${diet.meals?.dinner?.name}`);
-    console.log(`   ${diet.meals?.dinner?.cals} kcal | ${diet.meals?.dinner?.protein}`);
-
-    const totalCals = [
-        diet.meals?.breakfast?.cals,
-        diet.meals?.lunch?.cals,
-        diet.meals?.snack?.cals,
-        diet.meals?.dinner?.cals
-    ].reduce((a, b) => a + (parseInt(b) || 0), 0);
-
-    console.log('');
-    console.log(`📊 Total Cals: ${totalCals} | Target: ${diet.macroTargets?.cals} ${Math.abs(totalCals - parseInt(diet.macroTargets?.cals)) < 30 ? '✅' : '⚠️'}`);
-    console.log('');
-    console.log(`⚡ Pre-workout:  ${diet.trainingFuel?.pre}`);
-    console.log(`💪 Post-workout: ${diet.trainingFuel?.post}`);
-    console.log('');
-    if (diet.supplements?.length > 0) {
-        console.log('💊 Supplements:');
-        diet.supplements.forEach(s => {
-            if (typeof s === 'object' && s.name) {
-                console.log(`   ${s.name} — ${s.dosage} (${s.context})`);
-            }
+    try {
+        const res = await fetch(`${SERVER}/api/generate-ai-diet`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(profile)
         });
-    }
-    console.log('='.repeat(50));
 
-} catch (err) {
-    console.error('❌ Error:', err.message);
+        if (!res.ok) {
+            console.error(`❌ Request failed for ${profile.name}:`, res.status, await res.text());
+            continue;
+        }
+
+        const diet = await res.json();
+        console.log(`✅ Phase: ${diet.phaseLabel} (${Object.keys(diet.meals).length} meals)`);
+        console.log(`🎯 Target: ${diet.macroTargets?.cals} kcal | BMI: ${diet.bmi}`);
+        if (diet.safetyNote) console.log(`⚠️ SAFETY: ${diet.safetyNote}`);
+
+        const totalCals = Object.values(diet.meals || {}).reduce((a, b) => a + (parseInt(b.cals) || 0), 0);
+        console.log(`📊 Total: ${totalCals} kcal [${Math.abs(totalCals - parseInt(diet.macroTargets?.cals)) < 30 ? 'PASS' : 'FAIL'}]`);
+        console.log(`💊 Supps: ${diet.supplements?.map(s => s.name).join(', ')}`);
+        console.log('-'.repeat(30));
+
+    } catch (err) {
+        console.error(`❌ Error for ${profile.name}:`, err.message);
+    }
 }
+
