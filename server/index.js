@@ -2,10 +2,80 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import pool from './db.js';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 dotenv.config();
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 import { generateAIWorkout, generateAIDiet } from './ai.js';
+
+// ═══════════════════════════════════════════════════════
+// Auto-seed food_items table on startup (idempotent)
+// ═══════════════════════════════════════════════════════
+async function seedFoodDatabase() {
+    try {
+        // Create table if not exists
+        await pool.query(`
+            CREATE TABLE IF NOT EXISTS food_items (
+                id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+                name STRING NOT NULL,
+                calories INT NOT NULL,
+                protein_g FLOAT, carbs_g FLOAT, fat_g FLOAT, fibre_g FLOAT,
+                food_group STRING, diet_type STRING, source STRING,
+                created_at TIMESTAMP DEFAULT current_timestamp()
+            )
+        `);
+
+        // Check if already populated
+        const countResult = await pool.query('SELECT COUNT(*) FROM food_items');
+        const count = parseInt(countResult.rows[0].count);
+
+        if (count > 100) {
+            console.log(`Food DB ready: ${count} foods loaded`);
+            return;
+        }
+
+        // Import from CSV
+        const csvPath = path.join(__dirname, '../food-data/combined_indian_foods.csv');
+        if (!fs.existsSync(csvPath)) {
+            console.warn('food-data/combined_indian_foods.csv not found — skipping food seeding');
+            return;
+        }
+
+        console.log('Seeding food database from CSV...');
+        await pool.query('DELETE FROM food_items WHERE 1=1');
+        const lines = fs.readFileSync(csvPath, 'utf-8').split('\n').filter(l => l.trim()).slice(1);
+
+        let inserted = 0;
+        const BATCH = 50;
+        for (let i = 0; i < lines.length; i += BATCH) {
+            const batch = lines.slice(i, i + BATCH);
+            const params = [], values = [];
+            let p = 1;
+            for (const line of batch) {
+                const m = line.match(/^"([^"]+)",(\d+),([0-9.]+),([0-9.]+),([0-9.]+),([0-9.]+),"([^"]+)","([^"]+)","([^"]+)"$/);
+                if (!m) continue;
+                const [, name, cal, pro, carbs, fat, fib, grp, diet, src] = m;
+                params.push(`($${p++},$${p++},$${p++},$${p++},$${p++},$${p++},$${p++},$${p++},$${p++})`);
+                values.push(name, parseInt(cal), parseFloat(pro), parseFloat(carbs), parseFloat(fat), parseFloat(fib), grp, diet, src);
+            }
+            if (params.length) {
+                await pool.query(
+                    `INSERT INTO food_items (name,calories,protein_g,carbs_g,fat_g,fibre_g,food_group,diet_type,source) VALUES ${params.join(',')}`,
+                    values
+                );
+                inserted += params.length;
+            }
+        }
+        console.log(`Food DB seeded: ${inserted} Indian foods imported`);
+    } catch (err) {
+        console.error('Food DB seeding error:', err.message);
+    }
+}
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -14,13 +84,8 @@ const port = process.env.PORT || 3000;
 
 
 
-import path from 'path';
-import { fileURLToPath } from 'url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
-// ... existing code ...
 
 app.use(cors());
 app.use(express.json());
@@ -194,6 +259,10 @@ app.get(/(.*)/, (req, res) => {
     res.sendFile(path.join(distPath, 'index.html'));
 });
 
-app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
+// Start server — seed food DB first, then listen
+seedFoodDatabase().then(() => {
+    app.listen(port, () => {
+        console.log(`Server running at http://localhost:${port}`);
+    });
 });
+
