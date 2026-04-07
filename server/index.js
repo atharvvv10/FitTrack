@@ -266,13 +266,38 @@ app.get(/(.*)/, (req, res) => {
     if (req.path.startsWith('/api')) {
         return res.status(404).json({ error: "API Endpoint Not Found" });
     }
-    res.sendFile(path.join(distPath, 'index.html'));
+    // Only serve index.html in production where 'dist' exists
+    if (fs.existsSync(path.join(distPath, 'index.html'))) {
+        res.sendFile(path.join(distPath, 'index.html'));
+    } else {
+        res.send("API is running. (Frontend build not found)");
+    }
 });
 
+// ═══════════════════════════════════════════════════════
+// 🚀 SERVER EXPORT AND STARTUP
+// ═══════════════════════════════════════════════════════
+
 // Start server — seed food DB first, then listen
-seedFoodDatabase().then(() => {
-    app.listen(port, () => {
-        console.log(`Server running at http://localhost:${port}`);
-    });
-});
+const startServer = async () => {
+    await seedFoodDatabase();
+    if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+        app.listen(port, () => {
+            console.log(`Server running at http://localhost:${port}`);
+        });
+    }
+};
+
+// Check if we are in Vercel environment
+if (process.env.VERCEL) {
+    // In Vercel, the seeding should happen ideally beforehand,
+    // but we can try calling it once.
+    seedFoodDatabase().catch(console.error);
+} else {
+    // Start local server
+    startServer();
+}
+
+// Export app for Vercel
+export default app;
 
