@@ -266,6 +266,9 @@ app.get(/(.*)/, (req, res) => {
     if (req.path.startsWith('/api')) {
         return res.status(404).json({ error: "API Endpoint Not Found" });
     }
+    res.sendFile(path.join(distPath, 'index.html'));
+});
+
 // ═══════════════════════════════════════════════════════
 // 🚀 SERVER STARTUP
 // ═══════════════════════════════════════════════════════
@@ -285,4 +288,3 @@ const startServer = async () => {
 };
 
 startServer();
-
