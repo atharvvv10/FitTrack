@@ -1,4 +1,4 @@
-﻿
+
 import React, { useState, useEffect } from 'react';
 import { auth } from '../lib/firebase'; // Import Firebase Auth
 import { onAuthStateChanged } from 'firebase/auth';
@@ -191,10 +191,10 @@ const Diet = ({ diet, context, onDayComplete }) => {
     // Track whether streak was already incremented this session
     const [streakBumped, setStreakBumped] = useState(false);
 
-    // Helper: parse numbers from strings like "450 kcal", "35g", "2200", etc.
+    // Helper: parse numbers from strings like "450 kcal", "35.5g", "2200", etc.
     const parseNum = (val) => {
         if (typeof val === 'number') return val;
-        if (typeof val === 'string') return parseInt(val.replace(/[^0-9]/g, '')) || 0;
+        if (typeof val === 'string') return parseFloat(val.replace(/[^0-9.]/g, '')) || 0;
         return 0;
     };
 
@@ -245,16 +245,11 @@ const Diet = ({ diet, context, onDayComplete }) => {
 
     const { macroTargets, strategy, focusPoints, meals, supplements: supps, disclaimer, reassurance } = diet;
 
-    // Calculate targets FROM the actual meals (so eaten always sums to 100%)
-    const targetCals = mealSlots.reduce((sum, key) => {
-        if (diet?.meals?.[key]) return sum + parseNum(diet.meals[key].cals);
-        return sum;
-    }, 0) || parseNum(macroTargets?.cals) || 2200;
-
-    const targetProtein = mealSlots.reduce((sum, key) => {
-        if (diet?.meals?.[key]) return sum + parseNum(diet.meals[key].protein);
-        return sum;
-    }, 0) || parseNum(macroTargets?.protein) || 140;
+    // ── Use server-computed macroTargets as source of truth for display ──
+    // Summing raw meal values gives wrong results because DB protein columns
+    // contain per-serving values that may be large before calibration.
+    const targetCals = Math.round(parseNum(macroTargets?.cals) || 2200);
+    const targetProtein = Math.round(parseNum(macroTargets?.protein) || 140);
 
     const calPercent = Math.min((consumedCals / targetCals) * 100, 100);
     const proteinPercent = Math.min((consumedProtein / targetProtein) * 100, 100);
@@ -572,6 +567,11 @@ const Diet = ({ diet, context, onDayComplete }) => {
                                             {isEaten && <span style={{ marginRight: '8px' }}>✓</span>}
                                             {meal.name}
                                         </div>
+                                        {meal.description && (
+                                            <div style={{ fontSize: '0.92rem', color: '#bbb', lineHeight: '1.5', marginBottom: '8px' }}>
+                                                {meal.description}
+                                            </div>
+                                        )}
                                         <div style={{ fontSize: '0.9rem', color: '#888', lineHeight: '1.6', paddingLeft: '12px', borderLeft: '2px solid #333' }}>
                                             {meal.purpose}
                                         </div>
@@ -622,8 +622,8 @@ const Diet = ({ diet, context, onDayComplete }) => {
 
 
 
-    {/* 6. SYSTEM LOGIC */ }
-    <div style={{ marginBottom: '80px' }}>
+            {/* 6. SYSTEM LOGIC */}
+            <div style={{ marginBottom: '80px' }}>
                 <h4 style={{ fontSize: '0.85rem', color: '#666', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '32px', fontWeight: '600' }}>How This Plan Works</h4>
                 <div className="grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '40px' }}>
                     {Array.isArray(focusPoints) && focusPoints.map((point, idx) => (
@@ -645,8 +645,8 @@ const Diet = ({ diet, context, onDayComplete }) => {
                 </div>
             </div >
 
-    {/* 7. SUPPLEMENTS */ }
-    < div style = {{ marginBottom: '80px' }}>
+            {/* 7. SUPPLEMENTS */}
+            < div style={{ marginBottom: '80px' }}>
                 <div style={{ marginBottom: '24px' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
                         <span style={{ fontSize: '0.85rem', color: '#666', textTransform: 'uppercase', letterSpacing: '1.5px', fontWeight: '600' }}>Supplements</span>
@@ -720,17 +720,17 @@ const Diet = ({ diet, context, onDayComplete }) => {
                 </div>
             </div >
 
-    {/* 8. FOOTER */ }
-    < div style = {{
-    borderTop: '1px solid #222',
-        paddingTop: '32px',
-            display: 'flex',
+            {/* 8. FOOTER */}
+            < div style={{
+                borderTop: '1px solid #222',
+                paddingTop: '32px',
+                display: 'flex',
                 flexDirection: 'column',
-                    alignItems: 'center'
-}}>
-    <p style={{ fontSize: '0.75rem', color: '#444', maxWidth: '500px', lineHeight: '1.5', textAlign: 'center' }}>
-        {disclaimer ? disclaimer.replace("MEDICAL DISCLAIMER: ", "") : "Consult a qualified healthcare professional before starting any new diet."}
-    </p>
+                alignItems: 'center'
+            }}>
+                <p style={{ fontSize: '0.75rem', color: '#444', maxWidth: '500px', lineHeight: '1.5', textAlign: 'center' }}>
+                    {disclaimer ? disclaimer.replace("MEDICAL DISCLAIMER: ", "") : "Consult a qualified healthcare professional before starting any new diet."}
+                </p>
             </div >
         </div >
     );

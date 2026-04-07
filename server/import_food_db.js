@@ -25,16 +25,16 @@ async function main() {
     await pool.query(`
         CREATE TABLE IF NOT EXISTS food_items (
             id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-            name STRING NOT NULL,
+            name TEXT NOT NULL,
             calories INT NOT NULL,
             protein_g FLOAT,
             carbs_g FLOAT,
             fat_g FLOAT,
             fibre_g FLOAT,
-            food_group STRING,
-            diet_type STRING,
-            source STRING,
-            created_at TIMESTAMP DEFAULT current_timestamp()
+            food_group TEXT,
+            diet_type TEXT,
+            source TEXT,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         );
     `);
     console.log('✅ Table food_items created (or already exists)');
@@ -44,7 +44,7 @@ async function main() {
     console.log('🗑️  Cleared existing food_items data');
 
     // Step 3: Read CSV
-    const csvPath = path.join(__dirname, '../food-data/combined_indian_foods.csv');
+    const csvPath = path.join(__dirname, '../food-data/Indian_Diet_3000.csv');
     const lines = fs.readFileSync(csvPath, 'utf-8').split('\n').filter(l => l.trim());
     const dataLines = lines.slice(1); // skip header
 
@@ -61,14 +61,21 @@ async function main() {
         let pIdx = 1;
 
         for (const line of batch) {
-            // Parse CSV: "name",calories,protein,carbs,fat,fibre,"group","diet_type","source"
-            const match = line.match(/^"([^"]+)",(\d+),([0-9.]+),([0-9.]+),([0-9.]+),([0-9.]+),"([^"]+)","([^"]+)","([^"]+)"$/);
-            if (!match) { failed++; continue; }
+            const cols = line.split(',');
+            if (cols.length < 10) { failed++; continue; }
 
-            const [, name, calories, protein, carbs, fat, fibre, group, diet_type, source] = match;
+            const diet_type = cols[1];
+            const food_group = cols[2];
+            const name = cols[3].replace(/"/g, '').trim();
+            const source = cols[4].replace(/"/g, '').trim();
+            const calories = parseInt(cols[5]);
+            const protein = parseFloat(cols[6]);
+            const carbs = parseFloat(cols[7]);
+            const fat = parseFloat(cols[8]);
+            const fibre = parseFloat(cols[9]);
 
             params.push(`($${pIdx++}, $${pIdx++}, $${pIdx++}, $${pIdx++}, $${pIdx++}, $${pIdx++}, $${pIdx++}, $${pIdx++}, $${pIdx++})`);
-            values.push(name, parseInt(calories), parseFloat(protein), parseFloat(carbs), parseFloat(fat), parseFloat(fibre), group, diet_type, source);
+            values.push(name, calories, protein, carbs, fat, fibre, food_group, diet_type, source);
         }
 
         if (params.length === 0) continue;

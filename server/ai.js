@@ -180,10 +180,10 @@ const PHASES = {
 
 // ── Diet-type protein source mapping ────────────────────────────
 const DIET_TYPE_PROFILE = {
-    vegetarian: { dbFilter: "diet_type = 'vegetarian'", label: 'Vegetarian' },
-    vegan: { dbFilter: "diet_type = 'vegan' OR diet_type = 'vegetarian'", label: 'Vegan', b12Required: true },
-    eggetarian: { dbFilter: "diet_type = 'vegetarian' OR name ILIKE '%egg%'", label: 'Eggetarian' },
-    'non-vegetarian': { dbFilter: "(diet_type = 'non-vegetarian' OR diet_type = 'vegetarian')", label: 'Non-Veg' }
+    vegetarian: { dbFilter: "diet_type ILIKE 'vegetarian'", label: 'Vegetarian' },
+    vegan: { dbFilter: "diet_type ILIKE 'vegan'", label: 'Vegan', b12Required: true },
+    eggetarian: { dbFilter: "diet_type ILIKE 'eggetarian'", label: 'Eggetarian' },
+    'non-vegetarian': { dbFilter: "diet_type ILIKE 'non-vegetarian'", label: 'Non-Veg' }
 };
 
 // ── Training-type macro modifier ────────────────────────────────
@@ -282,30 +282,30 @@ function getMealSlots(mealCount) {
     // 6 meals: + mid_morning + bedtime
     const configs = {
         3: [
-            { key: 'breakfast', label: 'Breakfast', calPct: 0.30, groups: ['breakfast', 'cereals & grains', 'eggs', 'dairy'] },
-            { key: 'lunch', label: 'Lunch', calPct: 0.40, groups: ['lunch/dinner', 'pulses & legumes', 'meat & poultry', 'fish & seafood'] },
-            { key: 'dinner', label: 'Dinner', calPct: 0.30, groups: ['lunch/dinner', 'pulses & legumes', 'vegetables', 'soy products', 'meat & poultry'] }
+            { key: 'breakfast', label: 'Breakfast', calPct: 0.30, groups: ['breakfast'] },
+            { key: 'lunch', label: 'Lunch', calPct: 0.40, groups: ['lunch'] },
+            { key: 'dinner', label: 'Dinner', calPct: 0.30, groups: ['dinner'] }
         ],
         4: [
-            { key: 'breakfast', label: 'Breakfast', calPct: 0.25, groups: ['breakfast', 'cereals & grains', 'eggs', 'dairy', 'bread & rotis'] },
-            { key: 'lunch', label: 'Lunch', calPct: 0.35, groups: ['lunch/dinner', 'pulses & legumes', 'meat & poultry', 'fish & seafood', 'soy products'] },
-            { key: 'snack', label: 'Snack', calPct: 0.15, groups: ['snacks', 'fruits', 'nuts & seeds', 'beverages', 'sprouts'] },
-            { key: 'dinner', label: 'Dinner', calPct: 0.25, groups: ['lunch/dinner', 'pulses & legumes', 'vegetables', 'soy products', 'meat & poultry'] }
+            { key: 'breakfast', label: 'Breakfast', calPct: 0.25, groups: ['breakfast'] },
+            { key: 'lunch', label: 'Lunch', calPct: 0.35, groups: ['lunch'] },
+            { key: 'snack', label: 'Snack', calPct: 0.15, groups: ['evening snack', 'mid morning snack', 'snack'] },
+            { key: 'dinner', label: 'Dinner', calPct: 0.25, groups: ['dinner'] }
         ],
         5: [
-            { key: 'breakfast', label: 'Breakfast', calPct: 0.22, groups: ['breakfast', 'cereals & grains', 'eggs', 'dairy', 'bread & rotis'] },
-            { key: 'mid_morning', label: 'Mid-Morning', calPct: 0.12, groups: ['fruits', 'nuts & seeds', 'dairy', 'snacks', 'beverages'] },
-            { key: 'lunch', label: 'Lunch', calPct: 0.30, groups: ['lunch/dinner', 'pulses & legumes', 'meat & poultry', 'fish & seafood', 'soy products'] },
-            { key: 'snack', label: 'Evening Snack', calPct: 0.12, groups: ['snacks', 'fruits', 'sprouts', 'nuts & seeds'] },
-            { key: 'dinner', label: 'Dinner', calPct: 0.24, groups: ['lunch/dinner', 'pulses & legumes', 'vegetables', 'soy products', 'meat & poultry'] }
+            { key: 'breakfast', label: 'Breakfast', calPct: 0.22, groups: ['breakfast'] },
+            { key: 'mid_morning', label: 'Mid-Morning', calPct: 0.12, groups: ['mid morning snack'] },
+            { key: 'lunch', label: 'Lunch', calPct: 0.30, groups: ['lunch'] },
+            { key: 'snack', label: 'Evening Snack', calPct: 0.12, groups: ['evening snack'] },
+            { key: 'dinner', label: 'Dinner', calPct: 0.24, groups: ['dinner'] }
         ],
         6: [
-            { key: 'breakfast', label: 'Breakfast', calPct: 0.20, groups: ['breakfast', 'cereals & grains', 'eggs', 'dairy', 'bread & rotis'] },
-            { key: 'mid_morning', label: 'Mid-Morning', calPct: 0.12, groups: ['fruits', 'nuts & seeds', 'dairy', 'snacks'] },
-            { key: 'lunch', label: 'Lunch', calPct: 0.28, groups: ['lunch/dinner', 'pulses & legumes', 'meat & poultry', 'fish & seafood', 'soy products'] },
-            { key: 'snack', label: 'Evening Snack', calPct: 0.10, groups: ['snacks', 'fruits', 'sprouts'] },
-            { key: 'dinner', label: 'Dinner', calPct: 0.20, groups: ['lunch/dinner', 'pulses & legumes', 'vegetables', 'soy products', 'meat & poultry'] },
-            { key: 'bedtime', label: 'Bedtime Shake', calPct: 0.10, groups: ['dairy', 'nuts & seeds', 'soy products', 'beverages'] }
+            { key: 'breakfast', label: 'Breakfast', calPct: 0.20, groups: ['breakfast'] },
+            { key: 'mid_morning', label: 'Mid-Morning', calPct: 0.12, groups: ['mid morning snack'] },
+            { key: 'lunch', label: 'Lunch', calPct: 0.28, groups: ['lunch'] },
+            { key: 'snack', label: 'Evening Snack', calPct: 0.10, groups: ['evening snack'] },
+            { key: 'dinner', label: 'Dinner', calPct: 0.20, groups: ['dinner'] },
+            { key: 'bedtime', label: 'Bedtime Shake', calPct: 0.10, groups: ['evening snack', 'dinner'] }
         ]
     };
     return configs[mealCount] || configs[4];
@@ -332,8 +332,12 @@ export const generateAIDiet = async (userProfile) => {
 
         // Diet type filter
         const rawDietType = (userProfile.diet_type || 'vegetarian').toLowerCase();
-        const dietKey = Object.keys(DIET_TYPE_PROFILE).find(k => rawDietType.includes(k.replace('-', '').replace(' ', '')))
-            || (rawDietType.includes('non') ? 'non-vegetarian' : rawDietType) || 'vegetarian';
+        let dietKey = 'vegetarian';
+        if (rawDietType.includes('vegan')) dietKey = 'vegan';
+        else if (rawDietType.includes('egg')) dietKey = 'eggetarian';
+        else if (rawDietType.includes('non') || rawDietType.includes('chicken') || rawDietType.includes('meat')) dietKey = 'non-vegetarian';
+        else if (rawDietType.includes('veg')) dietKey = 'vegetarian';
+
         const dietProfile = DIET_TYPE_PROFILE[dietKey] || DIET_TYPE_PROFILE.vegetarian;
         const dietSqlFilter = dietProfile.dbFilter;
 
@@ -361,7 +365,6 @@ export const generateAIDiet = async (userProfile) => {
                 WHERE calories BETWEEN $1 AND $2
                   AND (${dietSqlFilter})
                   AND LOWER(food_group) = ANY(ARRAY[${groupList}])
-                  AND source IN ('ICMR_Curated', 'INDB_Kaggle')
                   AND name NOT ILIKE '%tagine%'   AND name NOT ILIKE '%shawarma%'
                   AND name NOT ILIKE '%pasta%'    AND name NOT ILIKE '%pizza%'
                   AND name NOT ILIKE '%burger%'   AND name NOT ILIKE '%wrap%'
@@ -374,17 +377,24 @@ export const generateAIDiet = async (userProfile) => {
                   AND name NOT ILIKE '%miso%'     AND name NOT ILIKE '%falafel%'
                   AND name NOT ILIKE '% dry%'     AND name NOT ILIKE '%(dry)%'
                   AND name NOT ILIKE '%(raw)%'    AND name NOT ILIKE '%(100g)%'
-                ORDER BY (${scoreExpr}) DESC, ABS(calories - $3) ASC
-                LIMIT 5
-            `, [minCals, maxCals, slotTarget]);
+                ORDER BY random()
+                LIMIT 12
+            `, [minCals, maxCals]);
 
             let rows = q.rows;
             if (rows.length === 0) {
-                // Fallback: any ICMR_Curated food
+                // Fallback: any food from correct group
                 const fb = await pool.query(
-                    "SELECT name, calories, protein_g, carbs_g, fat_g, fibre_g, food_group FROM food_items WHERE source = 'ICMR_Curated' AND name NOT ILIKE '% dry%' AND name NOT ILIKE '%(100g)%' ORDER BY random() LIMIT 5"
+                    `SELECT name, calories, protein_g, carbs_g, fat_g, fibre_g, food_group, source FROM food_items WHERE LOWER(food_group) = ANY(ARRAY[${groupList}]) AND (${dietSqlFilter}) AND name NOT ILIKE '% dry%' AND name NOT ILIKE '%(100g)%' ORDER BY random() LIMIT 10`
                 );
                 rows = fb.rows;
+                // If STILL empty, safe fallback to ANY group just so it doesn't crash (rare edge case for extreme diets)
+                if (rows.length === 0) {
+                    const fallbackAny = await pool.query(
+                        `SELECT name, calories, protein_g, carbs_g, fat_g, fibre_g, food_group, source FROM food_items WHERE (${dietSqlFilter}) AND name NOT ILIKE '% dry%' ORDER BY random() LIMIT 10`
+                    );
+                    rows = fallbackAny.rows;
+                }
             }
 
             candidateSets[slotCfg.key] = rows.map((r, i) => ({
@@ -393,7 +403,8 @@ export const generateAIDiet = async (userProfile) => {
                 pro: parseFloat(r.protein_g) || 0,
                 carbs: parseFloat(r.carbs_g) || 0,
                 fat: parseFloat(r.fat_g) || 0,
-                group: r.food_group
+                group: r.food_group,
+                source: r.source
             }));
         }
 
@@ -401,12 +412,13 @@ export const generateAIDiet = async (userProfile) => {
         const usedAcrossSlots = new Set();
         for (const slotCfg of slots) {
             const key = slotCfg.key;
+            const groupList = slotCfg.groups.map(g => `'${g.toLowerCase()}'`).join(',');
             candidateSets[key] = candidateSets[key].filter(f => !usedAcrossSlots.has(f.name));
             if (candidateSets[key].length === 0) {
                 const fb = await pool.query(
-                    "SELECT name, calories, protein_g, carbs_g, fat_g, fibre_g, food_group FROM food_items WHERE source = 'ICMR_Curated' AND name NOT ILIKE '% dry%' ORDER BY random() LIMIT 5"
+                    `SELECT name, calories, protein_g, carbs_g, fat_g, fibre_g, food_group, source FROM food_items WHERE LOWER(food_group) = ANY(ARRAY[${groupList}]) AND (${dietSqlFilter}) AND name NOT ILIKE '% dry%' ORDER BY random() LIMIT 10`
                 );
-                candidateSets[key] = fb.rows.map((r, i) => ({ id: i + 1, name: r.name, cals: parseInt(r.calories), pro: parseFloat(r.protein_g) || 0, carbs: parseFloat(r.carbs_g) || 0, fat: parseFloat(r.fat_g) || 0, group: r.food_group }));
+                candidateSets[key] = fb.rows.map((r, i) => ({ id: i + 1, name: r.name, cals: parseInt(r.calories), pro: parseFloat(r.protein_g) || 0, carbs: parseFloat(r.carbs_g) || 0, fat: parseFloat(r.fat_g) || 0, group: r.food_group, source: r.source }));
             }
             candidateSets[key].forEach((f, i) => { f.id = i + 1; usedAcrossSlots.add(f.name); });
         }
@@ -447,14 +459,32 @@ ${mealBlocks}
 PHASE SUPPLEMENTS TO RECOMMEND:
 ${supplementInfo}
 
-RULES:
-1. Pick a DIFFERENT food for each meal — NO REPEATS
-2. Choose ONLY from the numbered lists above — exact names
-3. Set serving_multiplier so the meal hits its calorie target
-4. Calculate cals/protein_g/carbs_g/fat_g = base × multiplier
-5. Supplements must match the phase: ${phaseConf.label}
+### STRICT CONSTRAINTS AND CATEGORY-SPECIFIC RULES:
+**1. Categorical Rules:**
+- **Vegetarian**: Only plant-based + dairy items. No eggs, no meat.
+- **Eggetarian**: Combination of Vegetarian and Egg-based. Maintain balance: ~70% veg, ~30% egg. Do not dominate with eggs.
+- **Non-Vegetarian**:
+   * *Breakfast / Mid Morning Snack* → ONLY vegetarian items (the dataset has mapped veg items under non-veg category here for you)
+   * *Lunch* → Proper/heavy non-veg (chicken curry, mutton curry, biryani, keema)
+   * *Evening Snack* → Light non-veg items (soups, grilled items, small portions/kebabs)
+   * *Dinner* → Light non-veg meals (grilled chicken, fish, stew, light curry)
+   * IMPORTANT: Do NOT include veg-only meals in lunch/dinner when non-veg is expected. Do NOT include heavy non-veg in snacks.
+- **Vegan**: Only plant-based items. No dairy, no eggs, no meat.
 
-Return ONLY valid JSON:
+**2. Meal Type Rules:**
+- NEVER mix meal types. Pick items strictly meant for the slot you are filling. 
+
+**3. Health constraints:**
+- Prefer healthy, home-style Indian meals. 
+
+**4. General Rules:**
+1. Pick a DIFFERENT food for each meal — NO REPEATS.
+2. Choose ONLY from the numbered lists provided above — use exact names.
+3. Set serving_multiplier to exactly adjust calories so the meal hits its slot calorie target.
+4. Calculate cals/protein_g/carbs_g/fat_g = base × serving_multiplier.
+5. Provide a short, culturally grounded description for the summary.
+
+Return ONLY valid JSON (matching this exact structure):
 {
   "meals": {
     ${mealSchemaKeys}
@@ -539,6 +569,7 @@ Return ONLY valid JSON:
                 protein: fProt + 'g',
                 carbs: fCarbs + 'g',
                 fat: fFat + 'g',
+                description: dbFood.source || '',
                 purpose: `${dbFood.group} — ${fCals} kcal | ${fProt}g protein | ${fCarbs}g carbs | ${fFat}g fat`
             };
 

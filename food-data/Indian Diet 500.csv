@@ -1,0 +1,501 @@
+ID,Category,Meal,Dish,Description,Calories,Protein,Carbs,Fats,Fiber
+1,Vegetarian,Evening Snack,Makhana,Makhana is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,124,10.5,49.6,6.0,10.8
+2,Vegetarian,Dinner,Roti Sabzi,Roti Sabzi is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,358,20.8,32.8,9.5,6.5
+3,Vegetarian,Breakfast,Upma,Upma is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,436,33.3,65.0,12.3,11.9
+4,Vegetarian,Dinner,Dal Khichdi,Dal Khichdi is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,538,26.1,72.9,20.5,7.2
+5,Vegetarian,Lunch,Veg Pulao,Veg Pulao is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,362,12.6,39.3,10.5,9.8
+6,Vegetarian,Evening Snack,Makhana,Makhana is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,174,13.3,36.4,14.0,13.2
+7,Vegetarian,Breakfast,Upma,Upma is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,463,13.2,53.5,18.5,7.1
+8,Vegetarian,Lunch,Dal Rice,Dal Rice is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,440,19.6,20.5,16.5,14.3
+9,Vegetarian,Mid Morning Snack,Buttermilk,Buttermilk is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,271,6.6,33.2,16.3,11.1
+10,Vegetarian,Mid Morning Snack,Buttermilk,Buttermilk is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,224,18.3,55.1,8.0,11.0
+11,Vegetarian,Lunch,Roti Sabzi,Roti Sabzi is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,422,6.8,55.6,25.0,9.1
+12,Vegetarian,Breakfast,Dosa,Dosa is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,473,31.9,68.7,6.0,14.0
+13,Vegetarian,Evening Snack,Veg Sandwich,Veg Sandwich is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,241,34.5,65.5,16.1,11.0
+14,Vegetarian,Evening Snack,Roasted Chana,Roasted Chana is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,195,24.2,52.6,11.9,9.5
+15,Vegetarian,Lunch,Paneer Curry,Paneer Curry is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,489,15.5,72.5,5.8,12.7
+16,Vegetarian,Breakfast,Upma,Upma is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,637,24.4,28.8,5.4,7.8
+17,Vegetarian,Mid Morning Snack,Curd,Curd is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,133,12.5,45.3,20.8,14.7
+18,Vegetarian,Evening Snack,Roasted Chana,Roasted Chana is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,277,18.8,21.4,8.1,14.4
+19,Vegetarian,Evening Snack,Roasted Chana,Roasted Chana is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,256,31.9,47.3,10.3,5.9
+20,Vegetarian,Mid Morning Snack,Buttermilk,Buttermilk is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,199,18.7,57.1,12.3,5.2
+21,Vegetarian,Breakfast,Poha,Poha is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,615,33.1,53.9,13.1,9.4
+22,Vegetarian,Breakfast,Dosa,Dosa is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,338,14.0,23.4,18.2,13.1
+23,Vegetarian,Mid Morning Snack,Apple,Apple is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,261,34.1,43.4,14.8,13.7
+24,Vegetarian,Lunch,Dal Rice,Dal Rice is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,535,19.7,50.7,21.1,9.6
+25,Vegetarian,Evening Snack,Veg Sandwich,Veg Sandwich is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,184,21.2,22.5,18.1,12.6
+26,Vegetarian,Dinner,Roti Sabzi,Roti Sabzi is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,536,27.1,52.2,15.2,12.0
+27,Vegetarian,Dinner,Roti Sabzi,Roti Sabzi is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,402,31.8,67.8,7.0,8.6
+28,Vegetarian,Evening Snack,Veg Sandwich,Veg Sandwich is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,183,25.2,22.5,21.8,5.5
+29,Vegetarian,Mid Morning Snack,Apple,Apple is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,163,26.9,69.5,10.1,4.7
+30,Vegetarian,Dinner,Dal Khichdi,Dal Khichdi is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,451,34.2,41.3,23.4,12.1
+31,Vegetarian,Mid Morning Snack,Apple,Apple is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,100,25.4,68.1,18.8,12.7
+32,Vegetarian,Dinner,Roti Sabzi,Roti Sabzi is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,443,28.2,74.5,13.6,14.2
+33,Vegetarian,Mid Morning Snack,Curd,Curd is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,157,21.4,37.3,23.8,9.9
+34,Vegetarian,Mid Morning Snack,Curd,Curd is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,143,27.3,34.8,24.9,12.3
+35,Vegetarian,Mid Morning Snack,Curd,Curd is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,172,7.2,24.6,19.1,13.5
+36,Vegetarian,Evening Snack,Veg Sandwich,Veg Sandwich is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,214,22.8,72.8,20.2,11.0
+37,Vegetarian,Dinner,Dal Khichdi,Dal Khichdi is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,417,13.0,39.1,8.0,10.6
+38,Vegetarian,Lunch,Paneer Curry,Paneer Curry is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,441,26.0,30.2,20.9,14.2
+39,Vegetarian,Dinner,Dal Khichdi,Dal Khichdi is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,405,12.7,42.8,17.9,6.5
+40,Vegetarian,Breakfast,Upma,Upma is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,561,30.3,21.4,14.4,14.7
+41,Vegetarian,Evening Snack,Makhana,Makhana is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,112,30.8,61.6,16.9,10.0
+42,Vegetarian,Evening Snack,Roasted Chana,Roasted Chana is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,121,14.7,42.2,22.2,7.2
+43,Vegetarian,Mid Morning Snack,Buttermilk,Buttermilk is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,280,13.6,53.9,5.7,7.3
+44,Vegetarian,Evening Snack,Veg Sandwich,Veg Sandwich is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,142,14.1,32.2,13.4,8.7
+45,Vegetarian,Breakfast,Vegetable Dalia,Vegetable Dalia is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,304,33.4,44.4,21.1,4.0
+46,Vegetarian,Breakfast,Idli Sambar,Idli Sambar is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,592,23.8,72.1,14.8,5.9
+47,Vegetarian,Breakfast,Vegetable Dalia,Vegetable Dalia is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,389,12.6,54.1,7.6,14.9
+48,Vegetarian,Lunch,Veg Pulao,Veg Pulao is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,319,21.5,45.6,18.6,8.0
+49,Vegetarian,Lunch,Paneer Curry,Paneer Curry is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,368,30.1,66.8,14.7,11.2
+50,Vegetarian,Mid Morning Snack,Buttermilk,Buttermilk is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,277,15.2,36.7,25.0,13.3
+51,Vegetarian,Dinner,Roti Sabzi,Roti Sabzi is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,430,34.9,38.2,12.2,5.6
+52,Vegetarian,Breakfast,Vegetable Dalia,Vegetable Dalia is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,511,28.6,73.5,8.3,8.9
+53,Vegetarian,Dinner,Roti Sabzi,Roti Sabzi is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,329,22.1,58.4,15.1,13.2
+54,Vegetarian,Mid Morning Snack,Banana,Banana is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,137,28.8,26.0,21.6,10.6
+55,Vegetarian,Lunch,Dal Rice,Dal Rice is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,404,14.1,54.8,19.4,10.2
+56,Vegetarian,Dinner,Dal Khichdi,Dal Khichdi is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,496,18.0,45.2,24.4,11.9
+57,Vegetarian,Evening Snack,Veg Sandwich,Veg Sandwich is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,207,23.3,49.0,11.4,6.0
+58,Vegetarian,Mid Morning Snack,Banana,Banana is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,151,34.0,33.6,15.3,3.7
+59,Vegetarian,Lunch,Paneer Curry,Paneer Curry is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,646,33.4,31.1,23.5,7.8
+60,Vegetarian,Breakfast,Idli Sambar,Idli Sambar is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,519,5.7,44.5,24.4,14.4
+61,Vegetarian,Dinner,Roti Sabzi,Roti Sabzi is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,496,12.6,26.5,17.6,9.5
+62,Vegetarian,Evening Snack,Roasted Chana,Roasted Chana is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,164,14.8,41.9,20.2,8.9
+63,Vegetarian,Evening Snack,Roasted Chana,Roasted Chana is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,207,27.7,57.5,5.4,4.3
+64,Vegetarian,Dinner,Dal Khichdi,Dal Khichdi is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,488,5.3,33.5,12.2,10.5
+65,Vegetarian,Dinner,Dal Khichdi,Dal Khichdi is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,552,10.5,31.3,21.0,3.7
+66,Vegetarian,Dinner,Roti Sabzi,Roti Sabzi is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,479,12.0,31.1,20.2,11.0
+67,Vegetarian,Breakfast,Vegetable Dalia,Vegetable Dalia is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,558,33.1,53.8,10.4,9.0
+68,Vegetarian,Dinner,Roti Sabzi,Roti Sabzi is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,642,18.0,31.2,7.5,8.7
+69,Vegetarian,Lunch,Paneer Curry,Paneer Curry is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,348,18.5,58.8,9.4,14.5
+70,Vegetarian,Breakfast,Upma,Upma is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,594,16.0,57.7,24.2,12.8
+71,Vegetarian,Breakfast,Dosa,Dosa is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,436,25.7,33.0,14.0,12.1
+72,Vegetarian,Evening Snack,Roasted Chana,Roasted Chana is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,265,12.5,43.5,23.1,3.5
+73,Vegetarian,Evening Snack,Veg Sandwich,Veg Sandwich is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,143,10.5,72.9,21.8,4.1
+74,Vegetarian,Dinner,Dal Khichdi,Dal Khichdi is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,578,25.7,71.7,15.0,10.8
+75,Vegetarian,Lunch,Veg Pulao,Veg Pulao is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,485,33.9,50.3,10.9,8.4
+76,Vegetarian,Dinner,Roti Sabzi,Roti Sabzi is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,563,12.6,24.4,13.8,14.2
+77,Vegetarian,Mid Morning Snack,Banana,Banana is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,189,6.1,67.0,9.0,9.8
+78,Vegetarian,Evening Snack,Veg Sandwich,Veg Sandwich is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,159,31.1,22.7,5.8,6.5
+79,Vegetarian,Mid Morning Snack,Apple,Apple is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,158,25.2,72.8,8.3,14.0
+80,Vegetarian,Dinner,Roti Sabzi,Roti Sabzi is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,529,21.0,52.2,8.2,13.0
+81,Vegetarian,Mid Morning Snack,Buttermilk,Buttermilk is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,249,16.7,32.2,15.2,11.0
+82,Vegetarian,Lunch,Dal Rice,Dal Rice is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,560,7.6,23.8,20.2,9.2
+83,Vegetarian,Dinner,Roti Sabzi,Roti Sabzi is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,510,17.8,66.5,24.6,6.1
+84,Vegetarian,Lunch,Roti Sabzi,Roti Sabzi is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,495,24.8,31.1,19.3,14.0
+85,Vegetarian,Evening Snack,Veg Sandwich,Veg Sandwich is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,245,28.0,45.2,9.6,12.1
+86,Vegetarian,Mid Morning Snack,Apple,Apple is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,119,7.8,54.8,6.3,13.0
+87,Vegetarian,Dinner,Roti Sabzi,Roti Sabzi is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,368,28.1,42.7,9.0,13.2
+88,Vegetarian,Evening Snack,Roasted Chana,Roasted Chana is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,259,6.6,55.5,9.8,7.3
+89,Vegetarian,Lunch,Veg Pulao,Veg Pulao is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,439,23.0,34.6,12.4,9.6
+90,Vegetarian,Lunch,Paneer Curry,Paneer Curry is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,413,33.9,40.4,21.4,11.3
+91,Vegetarian,Breakfast,Dosa,Dosa is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,410,23.9,51.8,13.0,12.5
+92,Vegetarian,Mid Morning Snack,Buttermilk,Buttermilk is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,140,34.8,73.9,12.8,11.1
+93,Vegetarian,Dinner,Dal Khichdi,Dal Khichdi is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,405,9.2,60.5,13.3,12.9
+94,Vegetarian,Evening Snack,Veg Sandwich,Veg Sandwich is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,261,15.5,23.9,19.2,12.2
+95,Vegetarian,Mid Morning Snack,Apple,Apple is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,244,29.1,24.9,11.4,5.2
+96,Vegetarian,Mid Morning Snack,Banana,Banana is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,196,13.7,40.3,23.0,10.6
+97,Vegetarian,Evening Snack,Roasted Chana,Roasted Chana is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,103,28.2,61.2,17.4,14.8
+98,Vegetarian,Evening Snack,Veg Sandwich,Veg Sandwich is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,119,11.8,30.5,18.5,10.1
+99,Vegetarian,Evening Snack,Roasted Chana,Roasted Chana is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,130,18.4,30.5,12.3,7.2
+100,Vegetarian,Lunch,Paneer Curry,Paneer Curry is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,624,7.4,49.3,14.3,7.0
+101,Vegetarian,Evening Snack,Roasted Chana,Roasted Chana is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,138,17.0,30.1,12.8,9.7
+102,Vegetarian,Evening Snack,Veg Sandwich,Veg Sandwich is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,211,11.4,68.4,16.2,9.2
+103,Vegetarian,Breakfast,Idli Sambar,Idli Sambar is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,473,34.7,52.8,21.7,11.5
+104,Vegetarian,Dinner,Roti Sabzi,Roti Sabzi is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,619,29.4,69.2,23.7,7.0
+105,Vegetarian,Lunch,Roti Sabzi,Roti Sabzi is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,493,16.3,40.5,20.8,10.8
+106,Vegetarian,Dinner,Dal Khichdi,Dal Khichdi is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,493,29.8,70.8,14.4,13.7
+107,Vegetarian,Breakfast,Vegetable Dalia,Vegetable Dalia is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,607,21.6,65.8,19.1,13.9
+108,Vegetarian,Dinner,Roti Sabzi,Roti Sabzi is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,425,23.8,65.9,14.4,14.9
+109,Vegetarian,Lunch,Paneer Curry,Paneer Curry is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,585,14.2,28.9,11.9,4.6
+110,Vegetarian,Lunch,Paneer Curry,Paneer Curry is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,450,15.7,41.4,9.2,4.0
+111,Vegetarian,Mid Morning Snack,Buttermilk,Buttermilk is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,117,19.5,54.3,14.6,4.7
+112,Vegetarian,Dinner,Dal Khichdi,Dal Khichdi is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,472,32.3,74.6,20.1,10.1
+113,Vegetarian,Evening Snack,Makhana,Makhana is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,109,7.3,66.4,10.6,5.8
+114,Vegetarian,Lunch,Dal Rice,Dal Rice is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,615,14.4,57.6,7.3,4.6
+115,Vegetarian,Mid Morning Snack,Banana,Banana is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,219,28.7,38.7,20.5,13.4
+116,Vegetarian,Mid Morning Snack,Apple,Apple is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,249,28.6,30.9,24.6,7.5
+117,Vegetarian,Breakfast,Vegetable Dalia,Vegetable Dalia is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,337,14.1,20.7,24.3,10.2
+118,Vegetarian,Lunch,Roti Sabzi,Roti Sabzi is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,413,13.0,36.0,11.2,3.3
+119,Vegetarian,Mid Morning Snack,Banana,Banana is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,224,30.5,62.1,16.4,9.7
+120,Vegetarian,Dinner,Roti Sabzi,Roti Sabzi is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,399,24.9,32.6,23.9,11.7
+121,Vegetarian,Mid Morning Snack,Banana,Banana is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,215,8.8,61.8,13.5,9.5
+122,Vegetarian,Mid Morning Snack,Curd,Curd is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,234,13.3,29.6,16.5,14.0
+123,Vegetarian,Evening Snack,Makhana,Makhana is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,199,30.0,68.5,18.9,10.5
+124,Vegetarian,Lunch,Paneer Curry,Paneer Curry is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,389,17.5,53.8,6.1,11.1
+125,Vegetarian,Evening Snack,Roasted Chana,Roasted Chana is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,188,26.6,65.4,11.6,13.2
+126,Vegetarian,Dinner,Dal Khichdi,Dal Khichdi is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,590,33.4,40.1,12.4,8.9
+127,Vegetarian,Mid Morning Snack,Banana,Banana is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,278,10.3,25.0,19.2,13.6
+128,Vegetarian,Lunch,Dal Rice,Dal Rice is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,456,23.1,27.9,5.1,7.8
+129,Vegetarian,Mid Morning Snack,Banana,Banana is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,141,29.4,32.1,17.2,12.4
+130,Vegetarian,Breakfast,Vegetable Dalia,Vegetable Dalia is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,578,20.5,33.9,19.2,10.0
+131,Vegetarian,Breakfast,Idli Sambar,Idli Sambar is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,421,30.6,31.9,14.5,15.0
+132,Vegetarian,Lunch,Roti Sabzi,Roti Sabzi is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,315,15.3,47.2,17.9,11.4
+133,Vegetarian,Lunch,Paneer Curry,Paneer Curry is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,576,24.1,65.8,8.6,13.6
+134,Vegetarian,Evening Snack,Veg Sandwich,Veg Sandwich is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,277,5.4,61.7,5.5,9.7
+135,Vegetarian,Breakfast,Upma,Upma is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,537,24.6,67.5,22.4,5.0
+136,Vegetarian,Mid Morning Snack,Banana,Banana is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,192,15.5,47.8,13.5,6.8
+137,Vegetarian,Dinner,Roti Sabzi,Roti Sabzi is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,572,12.4,70.8,8.2,5.7
+138,Vegetarian,Evening Snack,Makhana,Makhana is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,136,24.5,24.0,6.8,7.4
+139,Vegetarian,Lunch,Dal Rice,Dal Rice is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,308,32.3,65.5,7.8,4.5
+140,Vegetarian,Lunch,Roti Sabzi,Roti Sabzi is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,317,21.2,36.5,7.8,3.9
+141,Vegetarian,Lunch,Dal Rice,Dal Rice is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,646,19.4,55.9,13.0,4.1
+142,Vegetarian,Breakfast,Vegetable Dalia,Vegetable Dalia is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,521,31.1,29.7,23.0,6.6
+143,Vegetarian,Dinner,Dal Khichdi,Dal Khichdi is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,639,14.8,64.2,9.6,9.3
+144,Vegetarian,Evening Snack,Roasted Chana,Roasted Chana is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,255,27.3,32.7,6.7,5.1
+145,Vegetarian,Dinner,Roti Sabzi,Roti Sabzi is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,520,31.4,48.7,8.3,6.6
+146,Vegetarian,Mid Morning Snack,Buttermilk,Buttermilk is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,261,8.2,23.5,11.5,5.7
+147,Vegetarian,Mid Morning Snack,Buttermilk,Buttermilk is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,194,29.9,37.6,10.4,12.7
+148,Vegetarian,Breakfast,Vegetable Dalia,Vegetable Dalia is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,609,14.0,60.2,17.4,9.2
+149,Vegetarian,Dinner,Dal Khichdi,Dal Khichdi is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,324,5.7,60.8,10.8,3.5
+150,Vegetarian,Mid Morning Snack,Buttermilk,Buttermilk is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,251,24.4,67.3,12.9,6.2
+151,Eggetarian,Evening Snack,Roasted Chana,Roasted Chana is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,232,30.1,61.3,6.7,12.2
+152,Eggetarian,Dinner,Egg Curry Roti,Egg Curry Roti is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,625,23.0,44.6,21.7,9.5
+153,Eggetarian,Lunch,Paneer Curry,Paneer Curry is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,445,18.1,28.8,21.9,11.8
+154,Eggetarian,Breakfast,Vegetable Dalia,Vegetable Dalia is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,477,18.2,72.7,8.2,5.6
+155,Eggetarian,Breakfast,Vegetable Dalia,Vegetable Dalia is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,441,34.9,22.7,10.6,7.1
+156,Eggetarian,Lunch,Veg Pulao,Veg Pulao is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,371,16.4,23.8,6.7,7.6
+157,Eggetarian,Evening Snack,Makhana,Makhana is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,161,8.7,55.8,20.7,5.8
+158,Eggetarian,Breakfast,Egg Toast,Egg Toast is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,401,24.1,58.9,13.7,4.7
+159,Eggetarian,Evening Snack,Veg Sandwich,Veg Sandwich is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,167,26.1,36.6,18.2,11.8
+160,Eggetarian,Evening Snack,Veg Sandwich,Veg Sandwich is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,185,27.3,32.9,6.3,5.0
+161,Eggetarian,Dinner,Dal Khichdi,Dal Khichdi is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,625,32.5,56.8,10.3,3.8
+162,Eggetarian,Dinner,Egg Curry Roti,Egg Curry Roti is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,352,22.7,58.8,5.1,12.0
+163,Eggetarian,Evening Snack,Roasted Chana,Roasted Chana is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,225,13.9,49.1,11.0,6.4
+164,Eggetarian,Evening Snack,Veg Sandwich,Veg Sandwich is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,251,34.6,32.5,8.1,8.3
+165,Eggetarian,Mid Morning Snack,Boiled Egg,Boiled Egg is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,221,34.5,29.7,12.6,7.3
+166,Eggetarian,Evening Snack,Boiled Egg,Boiled Egg is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,199,10.6,33.7,7.6,12.9
+167,Eggetarian,Dinner,Egg Curry Roti,Egg Curry Roti is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,595,6.0,66.0,23.9,3.6
+168,Eggetarian,Dinner,Egg Curry Roti,Egg Curry Roti is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,613,26.2,33.5,17.3,11.9
+169,Eggetarian,Breakfast,Egg Toast,Egg Toast is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,481,7.9,62.4,24.9,5.3
+170,Eggetarian,Dinner,Dal Khichdi,Dal Khichdi is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,457,24.5,38.9,9.4,6.8
+171,Eggetarian,Lunch,Dal Rice,Dal Rice is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,483,31.4,41.6,22.4,13.6
+172,Eggetarian,Mid Morning Snack,Apple,Apple is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,126,11.5,67.4,18.2,12.9
+173,Eggetarian,Lunch,Egg Curry Rice,Egg Curry Rice is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,626,28.1,48.7,14.8,7.1
+174,Eggetarian,Mid Morning Snack,Boiled Egg,Boiled Egg is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,170,27.7,63.2,5.1,14.4
+175,Eggetarian,Evening Snack,Veg Sandwich,Veg Sandwich is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,160,32.2,47.8,15.9,8.6
+176,Eggetarian,Dinner,Egg Curry Roti,Egg Curry Roti is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,385,24.6,48.0,21.5,10.6
+177,Eggetarian,Breakfast,Vegetable Dalia,Vegetable Dalia is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,514,5.7,36.9,10.3,7.7
+178,Eggetarian,Evening Snack,Veg Sandwich,Veg Sandwich is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,192,16.5,31.9,11.7,12.9
+179,Eggetarian,Mid Morning Snack,Boiled Egg,Boiled Egg is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,167,5.3,30.8,24.1,3.0
+180,Eggetarian,Breakfast,Vegetable Dalia,Vegetable Dalia is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,532,17.6,74.8,6.1,12.9
+181,Eggetarian,Mid Morning Snack,Banana,Banana is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,144,29.2,31.5,18.4,9.4
+182,Eggetarian,Evening Snack,Veg Sandwich,Veg Sandwich is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,174,30.3,59.4,15.4,14.5
+183,Eggetarian,Dinner,Dal Khichdi,Dal Khichdi is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,457,31.0,71.2,11.1,11.6
+184,Eggetarian,Dinner,Roti Sabzi,Roti Sabzi is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,517,12.9,64.7,7.1,9.0
+185,Eggetarian,Lunch,Roti Sabzi,Roti Sabzi is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,598,32.4,54.2,17.1,14.3
+186,Eggetarian,Mid Morning Snack,Curd,Curd is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,236,33.9,44.7,16.8,14.1
+187,Eggetarian,Mid Morning Snack,Boiled Egg,Boiled Egg is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,166,28.6,66.2,8.9,14.2
+188,Eggetarian,Mid Morning Snack,Curd,Curd is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,209,6.3,49.1,12.5,8.5
+189,Eggetarian,Evening Snack,Roasted Chana,Roasted Chana is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,249,9.0,55.8,23.9,7.4
+190,Eggetarian,Breakfast,Vegetable Dalia,Vegetable Dalia is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,419,16.1,25.0,15.0,5.7
+191,Eggetarian,Lunch,Roti Sabzi,Roti Sabzi is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,368,18.2,71.9,7.1,14.9
+192,Eggetarian,Mid Morning Snack,Boiled Egg,Boiled Egg is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,278,6.0,74.6,23.2,9.1
+193,Eggetarian,Mid Morning Snack,Boiled Egg,Boiled Egg is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,220,27.5,39.5,16.4,9.0
+194,Eggetarian,Evening Snack,Makhana,Makhana is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,280,15.5,26.8,15.0,7.6
+195,Eggetarian,Mid Morning Snack,Buttermilk,Buttermilk is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,109,21.3,71.8,9.5,7.0
+196,Eggetarian,Lunch,Roti Sabzi,Roti Sabzi is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,526,20.0,66.2,5.9,12.9
+197,Eggetarian,Breakfast,Egg Toast,Egg Toast is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,615,5.2,36.6,22.4,9.1
+198,Eggetarian,Lunch,Paneer Curry,Paneer Curry is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,606,14.4,50.9,10.9,8.5
+199,Eggetarian,Lunch,Egg Bhurji Roti,Egg Bhurji Roti is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,592,28.6,51.2,17.1,13.8
+200,Eggetarian,Evening Snack,Egg Sandwich,Egg Sandwich is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,152,33.1,26.3,5.1,6.4
+201,Eggetarian,Evening Snack,Roasted Chana,Roasted Chana is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,131,32.1,39.8,5.2,6.7
+202,Eggetarian,Breakfast,Dosa,Dosa is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,383,7.5,49.8,11.5,11.7
+203,Eggetarian,Lunch,Egg Curry Rice,Egg Curry Rice is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,385,30.7,20.3,20.3,11.7
+204,Eggetarian,Lunch,Dal Rice,Dal Rice is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,448,11.7,41.6,23.0,9.8
+205,Eggetarian,Evening Snack,Roasted Chana,Roasted Chana is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,142,24.2,49.5,22.2,5.8
+206,Eggetarian,Evening Snack,Makhana,Makhana is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,145,5.6,58.2,19.5,11.6
+207,Eggetarian,Mid Morning Snack,Banana,Banana is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,134,9.8,50.8,19.5,13.9
+208,Eggetarian,Mid Morning Snack,Apple,Apple is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,253,30.3,65.0,12.5,4.0
+209,Eggetarian,Breakfast,Poha,Poha is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,645,27.7,59.6,12.9,12.2
+210,Eggetarian,Evening Snack,Boiled Egg,Boiled Egg is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,237,15.2,72.6,5.5,14.6
+211,Eggetarian,Evening Snack,Veg Sandwich,Veg Sandwich is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,189,8.4,46.0,10.1,6.0
+212,Eggetarian,Dinner,Dal Khichdi,Dal Khichdi is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,419,7.5,71.7,23.3,10.2
+213,Eggetarian,Mid Morning Snack,Buttermilk,Buttermilk is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,152,19.5,29.1,17.0,14.0
+214,Eggetarian,Breakfast,Boiled Eggs,Boiled Eggs is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,435,30.1,71.5,23.0,3.1
+215,Eggetarian,Dinner,Dal Khichdi,Dal Khichdi is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,638,17.5,52.3,22.7,6.2
+216,Eggetarian,Mid Morning Snack,Banana,Banana is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,194,33.3,22.2,16.2,7.5
+217,Eggetarian,Mid Morning Snack,Apple,Apple is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,173,9.3,45.6,23.0,11.7
+218,Eggetarian,Evening Snack,Makhana,Makhana is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,117,25.9,46.8,24.5,14.9
+219,Eggetarian,Lunch,Egg Bhurji Roti,Egg Bhurji Roti is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,433,15.2,20.4,17.1,5.7
+220,Eggetarian,Breakfast,Omelette,Omelette is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,448,6.8,60.3,12.8,5.1
+221,Eggetarian,Dinner,Dal Khichdi,Dal Khichdi is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,523,17.8,46.6,20.8,13.7
+222,Eggetarian,Evening Snack,Roasted Chana,Roasted Chana is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,138,33.2,49.3,16.9,13.0
+223,Eggetarian,Breakfast,Idli Sambar,Idli Sambar is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,550,10.3,21.8,25.0,9.7
+224,Eggetarian,Breakfast,Idli Sambar,Idli Sambar is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,403,21.5,23.7,18.9,4.0
+225,Eggetarian,Evening Snack,Makhana,Makhana is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,251,5.6,52.8,13.9,6.7
+226,Eggetarian,Breakfast,Omelette,Omelette is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,424,32.2,35.0,15.9,9.9
+227,Eggetarian,Lunch,Dal Rice,Dal Rice is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,454,19.0,33.2,8.6,7.0
+228,Eggetarian,Mid Morning Snack,Boiled Egg,Boiled Egg is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,172,11.8,22.0,18.2,5.2
+229,Eggetarian,Dinner,Egg Curry Roti,Egg Curry Roti is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,599,7.3,21.8,23.6,12.5
+230,Eggetarian,Mid Morning Snack,Boiled Egg,Boiled Egg is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,239,9.8,53.4,6.7,9.8
+231,Eggetarian,Evening Snack,Veg Sandwich,Veg Sandwich is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,222,31.4,35.6,6.0,9.2
+232,Eggetarian,Lunch,Egg Curry Rice,Egg Curry Rice is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,306,27.2,59.1,17.9,11.0
+233,Eggetarian,Lunch,Egg Curry Rice,Egg Curry Rice is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,590,20.1,32.6,9.6,12.3
+234,Eggetarian,Evening Snack,Veg Sandwich,Veg Sandwich is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,243,20.7,20.6,19.5,8.2
+235,Eggetarian,Evening Snack,Veg Sandwich,Veg Sandwich is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,108,18.2,22.0,15.3,13.7
+236,Eggetarian,Lunch,Veg Pulao,Veg Pulao is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,548,13.0,42.1,13.3,12.8
+237,Eggetarian,Dinner,Dal Khichdi,Dal Khichdi is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,305,27.7,57.3,7.8,12.6
+238,Eggetarian,Dinner,Roti Sabzi,Roti Sabzi is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,572,21.4,35.7,14.0,12.9
+239,Eggetarian,Dinner,Roti Sabzi,Roti Sabzi is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,586,15.8,46.2,19.0,4.4
+240,Eggetarian,Mid Morning Snack,Boiled Egg,Boiled Egg is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,158,12.1,23.0,5.3,9.7
+241,Eggetarian,Evening Snack,Boiled Egg,Boiled Egg is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,144,31.3,46.0,15.7,7.5
+242,Eggetarian,Evening Snack,Roasted Chana,Roasted Chana is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,194,9.0,34.4,17.0,3.5
+243,Eggetarian,Mid Morning Snack,Boiled Egg,Boiled Egg is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,104,11.1,61.3,9.1,14.8
+244,Eggetarian,Dinner,Dal Khichdi,Dal Khichdi is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,499,31.4,38.7,10.6,11.2
+245,Eggetarian,Evening Snack,Egg Sandwich,Egg Sandwich is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,220,20.8,29.2,23.0,3.9
+246,Eggetarian,Evening Snack,Roasted Chana,Roasted Chana is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,144,32.6,44.7,5.9,4.5
+247,Eggetarian,Evening Snack,Makhana,Makhana is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,197,8.0,28.1,12.3,7.0
+248,Eggetarian,Dinner,Roti Sabzi,Roti Sabzi is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,314,22.8,46.7,19.0,13.4
+249,Eggetarian,Lunch,Egg Curry Rice,Egg Curry Rice is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,346,22.0,29.0,10.0,8.6
+250,Eggetarian,Evening Snack,Veg Sandwich,Veg Sandwich is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,102,26.3,74.3,13.4,6.2
+251,Non-Vegetarian,Dinner,Chicken Kebab,Chicken Kebab is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,492,15.5,66.5,20.3,10.3
+252,Non-Vegetarian,Lunch,Mutton Curry with Rice,Mutton Curry with Rice is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,590,10.0,46.1,24.5,9.6
+253,Non-Vegetarian,Lunch,Mutton Curry with Rice,Mutton Curry with Rice is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,546,5.6,72.7,6.8,4.6
+254,Non-Vegetarian,Evening Snack,Grilled Chicken (small),Grilled Chicken (small) is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,213,33.3,42.0,12.9,6.3
+255,Non-Vegetarian,Dinner,Fish Fry (light),Fish Fry (light) is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,627,30.4,66.1,17.4,5.3
+256,Non-Vegetarian,Lunch,Butter Chicken with Rice,Butter Chicken with Rice is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,440,34.6,38.8,22.7,3.8
+257,Non-Vegetarian,Lunch,Butter Chicken with Rice,Butter Chicken with Rice is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,593,16.5,74.0,22.2,14.9
+258,Non-Vegetarian,Breakfast,Idli Sambar,Idli Sambar is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,438,30.2,69.7,16.5,10.4
+259,Non-Vegetarian,Mid Morning Snack,Apple,Apple is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,103,24.3,37.0,20.9,9.8
+260,Non-Vegetarian,Breakfast,Vegetable Dalia,Vegetable Dalia is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,320,18.9,74.3,12.7,3.4
+261,Non-Vegetarian,Breakfast,Dosa,Dosa is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,579,24.4,66.4,12.2,13.4
+262,Non-Vegetarian,Dinner,Grilled Fish,Grilled Fish is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,361,28.1,35.8,6.3,11.5
+263,Non-Vegetarian,Lunch,Chicken Masala Roti,Chicken Masala Roti is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,507,7.6,74.3,10.8,8.6
+264,Non-Vegetarian,Mid Morning Snack,Apple,Apple is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,187,15.2,34.8,23.0,12.9
+265,Non-Vegetarian,Dinner,Mutton Soup,Mutton Soup is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,639,30.8,27.1,18.6,11.7
+266,Non-Vegetarian,Mid Morning Snack,Buttermilk,Buttermilk is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,250,25.8,51.1,13.3,9.8
+267,Non-Vegetarian,Mid Morning Snack,Apple,Apple is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,165,26.0,21.2,16.8,5.4
+268,Non-Vegetarian,Evening Snack,Chicken Clear Soup,Chicken Clear Soup is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,118,15.0,58.2,20.4,12.4
+269,Non-Vegetarian,Evening Snack,Chicken Kebab (small portion),Chicken Kebab (small portion) is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,226,6.9,47.4,11.0,3.5
+270,Non-Vegetarian,Dinner,Grilled Fish,Grilled Fish is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,618,29.6,61.6,5.9,6.0
+271,Non-Vegetarian,Lunch,Chicken Masala Roti,Chicken Masala Roti is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,601,31.8,50.8,10.6,9.2
+272,Non-Vegetarian,Lunch,Mutton Curry with Rice,Mutton Curry with Rice is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,408,27.5,24.4,16.2,5.8
+273,Non-Vegetarian,Breakfast,Dosa,Dosa is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,443,12.0,58.8,13.5,12.6
+274,Non-Vegetarian,Dinner,Chicken Salad,Chicken Salad is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,602,34.2,69.7,18.4,10.6
+275,Non-Vegetarian,Lunch,Mutton Curry with Rice,Mutton Curry with Rice is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,359,11.9,63.0,14.0,5.1
+276,Non-Vegetarian,Dinner,Chicken Stew,Chicken Stew is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,489,11.6,23.1,6.1,8.1
+277,Non-Vegetarian,Mid Morning Snack,Buttermilk,Buttermilk is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,125,29.3,27.0,11.9,5.0
+278,Non-Vegetarian,Evening Snack,Chicken Kebab (small portion),Chicken Kebab (small portion) is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,121,20.3,59.1,12.5,4.5
+279,Non-Vegetarian,Dinner,Chicken Stew,Chicken Stew is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,492,23.4,63.0,10.4,12.4
+280,Non-Vegetarian,Dinner,Light Butter Chicken with Roti,Light Butter Chicken with Roti is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,559,27.2,72.0,13.3,6.5
+281,Non-Vegetarian,Breakfast,Upma,Upma is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,479,6.3,40.1,11.8,9.9
+282,Non-Vegetarian,Evening Snack,Chicken Kebab (small portion),Chicken Kebab (small portion) is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,123,21.9,72.4,18.7,10.6
+283,Non-Vegetarian,Mid Morning Snack,Curd,Curd is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,253,21.5,45.3,7.5,9.7
+284,Non-Vegetarian,Mid Morning Snack,Buttermilk,Buttermilk is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,262,13.3,62.9,20.0,11.4
+285,Non-Vegetarian,Lunch,Tandoori Chicken with Roti,Tandoori Chicken with Roti is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,621,16.4,59.8,9.6,4.3
+286,Non-Vegetarian,Dinner,Fish Fry (light),Fish Fry (light) is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,311,16.5,56.3,13.1,12.6
+287,Non-Vegetarian,Lunch,Mutton Keema Pav,Mutton Keema Pav is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,317,7.6,47.3,18.8,6.5
+288,Non-Vegetarian,Evening Snack,Chicken Kebab (small portion),Chicken Kebab (small portion) is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,109,26.8,55.4,18.6,11.1
+289,Non-Vegetarian,Breakfast,Idli Sambar,Idli Sambar is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,535,11.2,28.8,6.3,3.5
+290,Non-Vegetarian,Evening Snack,Chicken Kebab (small portion),Chicken Kebab (small portion) is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,198,18.8,29.9,8.5,7.8
+291,Non-Vegetarian,Evening Snack,Chicken Kebab (small portion),Chicken Kebab (small portion) is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,194,10.7,69.3,5.8,13.4
+292,Non-Vegetarian,Breakfast,Idli Sambar,Idli Sambar is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,336,14.8,44.7,13.6,5.0
+293,Non-Vegetarian,Evening Snack,Chicken Kebab (small portion),Chicken Kebab (small portion) is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,202,28.6,31.0,12.1,13.5
+294,Non-Vegetarian,Dinner,Chicken Kebab,Chicken Kebab is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,524,27.6,60.3,23.2,8.7
+295,Non-Vegetarian,Mid Morning Snack,Buttermilk,Buttermilk is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,191,17.7,45.9,14.2,9.8
+296,Non-Vegetarian,Mid Morning Snack,Apple,Apple is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,208,19.3,50.5,8.6,12.3
+297,Non-Vegetarian,Lunch,Chicken Biryani,Chicken Biryani is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,622,5.0,74.3,22.4,9.5
+298,Non-Vegetarian,Mid Morning Snack,Curd,Curd is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,146,12.9,72.9,6.7,9.4
+299,Non-Vegetarian,Dinner,Chicken Stew,Chicken Stew is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,604,12.9,42.8,5.4,5.2
+300,Non-Vegetarian,Breakfast,Poha,Poha is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,411,13.8,72.8,10.4,4.1
+301,Non-Vegetarian,Lunch,Chicken Biryani,Chicken Biryani is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,373,30.0,27.8,20.4,4.9
+302,Non-Vegetarian,Breakfast,Poha,Poha is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,445,33.6,34.5,13.5,14.4
+303,Non-Vegetarian,Evening Snack,Chicken Kebab (small portion),Chicken Kebab (small portion) is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,192,13.6,36.9,15.9,5.5
+304,Non-Vegetarian,Mid Morning Snack,Banana,Banana is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,165,20.9,21.1,19.1,12.5
+305,Non-Vegetarian,Lunch,Chicken Kebab with Roti,Chicken Kebab with Roti is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,320,16.1,50.2,8.6,3.9
+306,Non-Vegetarian,Breakfast,Upma,Upma is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,345,5.9,73.2,12.1,10.0
+307,Non-Vegetarian,Dinner,Grilled Chicken,Grilled Chicken is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,623,29.7,51.4,7.3,6.0
+308,Non-Vegetarian,Lunch,Butter Chicken with Rice,Butter Chicken with Rice is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,327,33.4,30.2,22.9,13.3
+309,Non-Vegetarian,Lunch,Chicken Keema with Roti,Chicken Keema with Roti is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,618,31.7,50.4,15.4,11.9
+310,Non-Vegetarian,Evening Snack,Chicken Clear Soup,Chicken Clear Soup is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,105,19.7,20.1,17.0,13.2
+311,Non-Vegetarian,Mid Morning Snack,Buttermilk,Buttermilk is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,138,7.6,36.0,24.8,5.2
+312,Non-Vegetarian,Mid Morning Snack,Banana,Banana is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,203,30.5,53.9,10.8,9.2
+313,Non-Vegetarian,Lunch,Mutton Keema Pav,Mutton Keema Pav is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,312,19.8,55.1,13.4,11.6
+314,Non-Vegetarian,Mid Morning Snack,Banana,Banana is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,265,21.5,73.1,16.6,14.9
+315,Non-Vegetarian,Breakfast,Idli Sambar,Idli Sambar is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,304,14.8,25.6,12.7,3.7
+316,Non-Vegetarian,Mid Morning Snack,Curd,Curd is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,103,6.5,70.0,7.4,12.8
+317,Non-Vegetarian,Breakfast,Dosa,Dosa is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,484,32.7,39.1,7.2,11.7
+318,Non-Vegetarian,Breakfast,Upma,Upma is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,570,5.4,42.6,6.0,7.8
+319,Non-Vegetarian,Dinner,Mutton Soup,Mutton Soup is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,510,18.1,36.2,19.7,14.6
+320,Non-Vegetarian,Lunch,Chicken Biryani,Chicken Biryani is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,602,22.2,68.1,25.0,6.8
+321,Non-Vegetarian,Mid Morning Snack,Buttermilk,Buttermilk is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,133,9.5,50.7,12.5,7.1
+322,Non-Vegetarian,Mid Morning Snack,Curd,Curd is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,170,20.5,48.8,13.0,3.6
+323,Non-Vegetarian,Evening Snack,Grilled Chicken (small),Grilled Chicken (small) is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,128,5.2,26.6,10.2,6.1
+324,Non-Vegetarian,Breakfast,Poha,Poha is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,499,13.4,55.8,8.1,12.8
+325,Non-Vegetarian,Mid Morning Snack,Buttermilk,Buttermilk is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,250,9.6,22.5,18.1,3.0
+326,Non-Vegetarian,Lunch,Butter Chicken with Rice,Butter Chicken with Rice is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,511,18.5,59.9,23.8,9.3
+327,Non-Vegetarian,Lunch,Mutton Keema Pav,Mutton Keema Pav is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,417,12.9,27.9,16.1,7.7
+328,Non-Vegetarian,Mid Morning Snack,Apple,Apple is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,269,33.4,64.6,20.2,7.1
+329,Non-Vegetarian,Dinner,Grilled Fish,Grilled Fish is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,513,27.8,36.4,5.5,4.3
+330,Non-Vegetarian,Breakfast,Dosa,Dosa is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,330,11.6,47.9,12.4,8.3
+331,Non-Vegetarian,Mid Morning Snack,Curd,Curd is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,157,25.2,73.9,23.5,9.0
+332,Non-Vegetarian,Mid Morning Snack,Curd,Curd is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,263,17.2,20.8,21.0,5.6
+333,Non-Vegetarian,Evening Snack,Chicken Clear Soup,Chicken Clear Soup is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,108,29.7,71.3,19.8,10.0
+334,Non-Vegetarian,Breakfast,Poha,Poha is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,529,28.1,36.8,19.9,12.0
+335,Non-Vegetarian,Mid Morning Snack,Banana,Banana is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,140,15.1,38.0,6.3,12.4
+336,Non-Vegetarian,Breakfast,Vegetable Dalia,Vegetable Dalia is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,422,12.7,69.0,21.8,7.0
+337,Non-Vegetarian,Mid Morning Snack,Apple,Apple is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,116,6.3,37.1,21.1,5.4
+338,Non-Vegetarian,Dinner,Fish Fry (light),Fish Fry (light) is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,328,32.0,31.4,23.8,8.5
+339,Non-Vegetarian,Evening Snack,Chicken Kebab (small portion),Chicken Kebab (small portion) is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,237,11.7,52.2,21.6,11.4
+340,Non-Vegetarian,Mid Morning Snack,Apple,Apple is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,113,8.1,25.4,22.6,8.0
+341,Non-Vegetarian,Lunch,Chicken Kebab with Roti,Chicken Kebab with Roti is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,582,26.7,59.4,17.6,13.3
+342,Non-Vegetarian,Mid Morning Snack,Banana,Banana is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,269,30.1,44.2,15.1,10.0
+343,Non-Vegetarian,Mid Morning Snack,Curd,Curd is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,260,13.7,28.3,15.1,13.1
+344,Non-Vegetarian,Dinner,Chicken Stew,Chicken Stew is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,385,27.4,33.4,13.9,14.9
+345,Non-Vegetarian,Evening Snack,Chicken Kebab (small portion),Chicken Kebab (small portion) is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,171,11.0,38.2,21.1,9.5
+346,Non-Vegetarian,Evening Snack,Chicken Clear Soup,Chicken Clear Soup is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,183,12.1,50.3,6.0,13.3
+347,Non-Vegetarian,Mid Morning Snack,Curd,Curd is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,113,17.8,47.8,11.1,7.6
+348,Non-Vegetarian,Evening Snack,Chicken Clear Soup,Chicken Clear Soup is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,130,29.9,30.5,17.0,7.9
+349,Non-Vegetarian,Mid Morning Snack,Curd,Curd is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,193,24.0,59.9,18.6,4.3
+350,Non-Vegetarian,Evening Snack,Fish Soup,Fish Soup is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,250,29.4,61.3,7.5,12.4
+351,Non-Vegetarian,Breakfast,Idli Sambar,Idli Sambar is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,491,23.3,65.3,18.2,4.2
+352,Non-Vegetarian,Evening Snack,Grilled Chicken (small),Grilled Chicken (small) is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,252,15.5,36.8,22.6,8.5
+353,Non-Vegetarian,Lunch,Chicken Keema with Roti,Chicken Keema with Roti is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,458,34.9,49.1,24.2,13.6
+354,Non-Vegetarian,Mid Morning Snack,Apple,Apple is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,238,25.1,27.8,11.9,6.7
+355,Non-Vegetarian,Breakfast,Idli Sambar,Idli Sambar is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,309,31.6,25.9,9.2,8.1
+356,Non-Vegetarian,Dinner,Mutton Soup,Mutton Soup is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,353,25.4,26.4,18.5,4.7
+357,Non-Vegetarian,Lunch,Prawn Curry Rice,Prawn Curry Rice is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,361,24.4,28.1,22.3,14.3
+358,Non-Vegetarian,Lunch,Chicken Keema with Roti,Chicken Keema with Roti is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,382,20.1,46.8,22.2,10.7
+359,Non-Vegetarian,Dinner,Chicken Kebab,Chicken Kebab is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,447,19.9,32.7,8.5,10.3
+360,Non-Vegetarian,Dinner,Chicken Kebab,Chicken Kebab is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,389,22.9,23.6,21.1,14.4
+361,Non-Vegetarian,Dinner,Fish Fry (light),Fish Fry (light) is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,491,7.3,53.7,7.9,11.2
+362,Non-Vegetarian,Dinner,Fish Fry (light),Fish Fry (light) is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,371,8.8,55.4,7.8,5.9
+363,Non-Vegetarian,Breakfast,Upma,Upma is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,618,23.2,45.0,7.1,5.8
+364,Non-Vegetarian,Breakfast,Idli Sambar,Idli Sambar is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,619,28.0,40.7,15.7,12.9
+365,Non-Vegetarian,Mid Morning Snack,Banana,Banana is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,264,7.7,39.6,17.9,3.5
+366,Non-Vegetarian,Breakfast,Dosa,Dosa is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,569,26.4,63.7,13.0,11.5
+367,Non-Vegetarian,Lunch,Tandoori Chicken with Roti,Tandoori Chicken with Roti is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,373,17.8,57.3,21.6,5.4
+368,Non-Vegetarian,Mid Morning Snack,Banana,Banana is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,202,15.8,46.6,14.5,5.5
+369,Non-Vegetarian,Evening Snack,Grilled Chicken (small),Grilled Chicken (small) is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,224,20.8,69.2,14.5,9.0
+370,Non-Vegetarian,Dinner,Grilled Fish,Grilled Fish is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,537,22.1,29.6,16.7,4.0
+371,Non-Vegetarian,Lunch,Tandoori Chicken with Roti,Tandoori Chicken with Roti is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,468,21.8,35.2,22.7,3.0
+372,Non-Vegetarian,Mid Morning Snack,Buttermilk,Buttermilk is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,194,14.0,72.5,23.9,11.1
+373,Non-Vegetarian,Dinner,Fish Fry (light),Fish Fry (light) is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,383,18.4,24.0,8.6,10.4
+374,Non-Vegetarian,Dinner,Mutton Soup,Mutton Soup is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,601,12.5,44.9,11.6,5.4
+375,Non-Vegetarian,Evening Snack,Chicken Kebab (small portion),Chicken Kebab (small portion) is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,259,11.6,50.4,14.8,10.3
+376,Non-Vegetarian,Mid Morning Snack,Apple,Apple is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,233,12.6,24.2,16.1,3.5
+377,Non-Vegetarian,Evening Snack,Chicken Clear Soup,Chicken Clear Soup is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,263,5.6,71.2,12.1,11.6
+378,Non-Vegetarian,Dinner,Chicken Salad,Chicken Salad is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,326,5.1,60.2,17.5,13.6
+379,Non-Vegetarian,Evening Snack,Chicken Clear Soup,Chicken Clear Soup is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,103,27.0,31.7,9.8,10.9
+380,Non-Vegetarian,Mid Morning Snack,Buttermilk,Buttermilk is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,188,14.1,66.5,12.8,4.2
+381,Non-Vegetarian,Breakfast,Poha,Poha is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,495,33.9,27.3,7.7,3.6
+382,Non-Vegetarian,Lunch,Mutton Curry with Rice,Mutton Curry with Rice is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,335,29.8,29.7,12.9,5.2
+383,Non-Vegetarian,Dinner,Tandoori Chicken,Tandoori Chicken is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,526,12.2,45.5,14.8,11.9
+384,Non-Vegetarian,Evening Snack,Chicken Kebab (small portion),Chicken Kebab (small portion) is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,233,20.2,47.5,18.7,5.1
+385,Non-Vegetarian,Evening Snack,Chicken Clear Soup,Chicken Clear Soup is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,219,16.0,25.6,23.8,7.3
+386,Non-Vegetarian,Dinner,Chicken Kebab,Chicken Kebab is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,590,5.8,36.5,12.2,14.7
+387,Non-Vegetarian,Dinner,Mutton Soup,Mutton Soup is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,498,6.2,23.2,9.1,6.1
+388,Non-Vegetarian,Evening Snack,Chicken Clear Soup,Chicken Clear Soup is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,144,30.2,47.5,14.5,13.5
+389,Non-Vegetarian,Dinner,Chicken Kebab,Chicken Kebab is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,494,15.9,68.1,16.7,13.7
+390,Non-Vegetarian,Evening Snack,Grilled Chicken (small),Grilled Chicken (small) is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,214,22.5,44.1,14.5,11.7
+391,Non-Vegetarian,Breakfast,Poha,Poha is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,315,27.1,66.0,15.4,10.9
+392,Non-Vegetarian,Dinner,Light Butter Chicken with Roti,Light Butter Chicken with Roti is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,553,23.3,49.0,9.5,10.2
+393,Non-Vegetarian,Breakfast,Dosa,Dosa is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,413,13.7,52.2,6.4,5.4
+394,Non-Vegetarian,Evening Snack,Grilled Chicken (small),Grilled Chicken (small) is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,157,25.4,59.9,8.0,4.5
+395,Non-Vegetarian,Breakfast,Dosa,Dosa is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,507,16.7,56.8,10.5,4.2
+396,Non-Vegetarian,Dinner,Light Butter Chicken with Roti,Light Butter Chicken with Roti is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,370,18.6,72.0,18.4,12.9
+397,Non-Vegetarian,Dinner,Grilled Fish,Grilled Fish is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,635,17.2,27.8,14.1,7.1
+398,Non-Vegetarian,Lunch,Butter Chicken with Rice,Butter Chicken with Rice is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,430,23.4,55.7,11.4,13.9
+399,Non-Vegetarian,Evening Snack,Chicken Kebab (small portion),Chicken Kebab (small portion) is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,123,30.9,53.2,16.5,5.9
+400,Non-Vegetarian,Breakfast,Vegetable Dalia,Vegetable Dalia is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,610,21.8,34.2,16.1,8.2
+401,Vegan,Dinner,Veg Stir Fry,Veg Stir Fry is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,483,10.5,73.8,24.1,3.2
+402,Vegan,Breakfast,Fruit Bowl,Fruit Bowl is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,364,25.8,22.1,10.1,5.8
+403,Vegan,Evening Snack,Peanuts,Peanuts is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,171,11.8,36.6,14.3,6.9
+404,Vegan,Mid Morning Snack,Coconut Water,Coconut Water is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,121,10.1,58.4,20.4,14.4
+405,Vegan,Dinner,Veg Stir Fry,Veg Stir Fry is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,309,14.9,25.7,23.5,7.5
+406,Vegan,Dinner,Veg Stir Fry,Veg Stir Fry is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,611,5.1,40.8,17.0,7.9
+407,Vegan,Dinner,Tofu Curry,Tofu Curry is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,301,31.8,65.8,18.7,7.2
+408,Vegan,Evening Snack,Veg Sandwich,Veg Sandwich is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,259,20.6,56.1,12.2,10.2
+409,Vegan,Evening Snack,Peanuts,Peanuts is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,268,10.3,62.2,20.9,9.5
+410,Vegan,Breakfast,Oats Almond Milk,Oats Almond Milk is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,496,19.3,59.1,8.2,7.3
+411,Vegan,Dinner,Veg Stir Fry,Veg Stir Fry is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,543,31.6,62.2,18.5,8.1
+412,Vegan,Lunch,Chole Roti,Chole Roti is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,374,20.1,56.1,8.1,4.1
+413,Vegan,Breakfast,Fruit Bowl,Fruit Bowl is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,561,20.5,25.8,8.2,11.7
+414,Vegan,Lunch,Chole Roti,Chole Roti is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,437,8.0,24.1,10.4,12.1
+415,Vegan,Mid Morning Snack,Fruit Bowl,Fruit Bowl is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,116,20.7,29.2,21.6,6.4
+416,Vegan,Breakfast,Sprouts Salad,Sprouts Salad is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,301,16.1,26.3,19.7,12.8
+417,Vegan,Mid Morning Snack,Coconut Water,Coconut Water is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,174,33.4,41.7,24.0,5.4
+418,Vegan,Lunch,Chole Roti,Chole Roti is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,490,8.4,38.9,22.8,14.5
+419,Vegan,Lunch,Rajma Rice,Rajma Rice is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,531,17.7,67.9,18.0,9.3
+420,Vegan,Breakfast,Oats Almond Milk,Oats Almond Milk is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,538,27.7,62.5,5.7,8.1
+421,Vegan,Dinner,Tofu Curry,Tofu Curry is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,540,14.7,47.3,18.7,11.0
+422,Vegan,Mid Morning Snack,Roasted Peanuts,Roasted Peanuts is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,255,15.3,55.6,17.9,8.7
+423,Vegan,Mid Morning Snack,Coconut Water,Coconut Water is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,157,18.9,24.0,15.6,7.5
+424,Vegan,Lunch,Chole Roti,Chole Roti is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,407,23.2,33.7,14.7,3.5
+425,Vegan,Mid Morning Snack,Roasted Peanuts,Roasted Peanuts is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,154,30.7,75.0,17.0,10.8
+426,Vegan,Lunch,Rajma Rice,Rajma Rice is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,468,30.0,68.1,6.3,6.8
+427,Vegan,Lunch,Veg Khichdi,Veg Khichdi is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,627,8.6,29.0,17.5,12.8
+428,Vegan,Evening Snack,Veg Sandwich,Veg Sandwich is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,189,12.4,45.4,13.3,3.9
+429,Vegan,Lunch,Veg Khichdi,Veg Khichdi is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,646,31.1,47.3,16.7,5.8
+430,Vegan,Breakfast,Oats Almond Milk,Oats Almond Milk is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,528,14.7,46.5,12.4,7.5
+431,Vegan,Evening Snack,Veg Sandwich,Veg Sandwich is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,239,21.5,41.2,24.9,14.4
+432,Vegan,Evening Snack,Roasted Makhana,Roasted Makhana is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,257,18.5,27.2,12.2,13.0
+433,Vegan,Evening Snack,Veg Sandwich,Veg Sandwich is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,155,10.4,61.6,22.6,11.3
+434,Vegan,Mid Morning Snack,Coconut Water,Coconut Water is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,266,30.1,40.5,20.8,8.1
+435,Vegan,Breakfast,Fruit Bowl,Fruit Bowl is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,597,28.8,54.0,9.4,13.3
+436,Vegan,Evening Snack,Peanuts,Peanuts is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,272,31.7,33.3,18.4,12.7
+437,Vegan,Mid Morning Snack,Coconut Water,Coconut Water is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,119,21.0,56.7,22.4,12.3
+438,Vegan,Dinner,Veg Stir Fry,Veg Stir Fry is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,616,20.6,31.4,9.6,9.5
+439,Vegan,Breakfast,Sprouts Salad,Sprouts Salad is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,307,6.2,54.1,19.0,12.3
+440,Vegan,Breakfast,Sprouts Salad,Sprouts Salad is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,530,9.7,30.0,7.2,5.4
+441,Vegan,Mid Morning Snack,Fruit Bowl,Fruit Bowl is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,136,28.5,42.2,24.0,14.9
+442,Vegan,Evening Snack,Roasted Makhana,Roasted Makhana is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,213,25.5,63.2,15.7,3.7
+443,Vegan,Breakfast,Sprouts Salad,Sprouts Salad is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,453,28.5,36.4,14.3,4.8
+444,Vegan,Dinner,Tofu Curry,Tofu Curry is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,526,11.6,66.7,19.3,10.2
+445,Vegan,Mid Morning Snack,Coconut Water,Coconut Water is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,225,33.3,72.8,18.8,11.7
+446,Vegan,Lunch,Chole Roti,Chole Roti is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,477,9.0,64.7,19.5,13.1
+447,Vegan,Evening Snack,Peanuts,Peanuts is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,140,28.1,58.7,12.7,9.8
+448,Vegan,Evening Snack,Roasted Makhana,Roasted Makhana is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,173,11.9,58.4,23.0,12.6
+449,Vegan,Lunch,Rajma Rice,Rajma Rice is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,597,20.0,33.2,6.4,8.6
+450,Vegan,Mid Morning Snack,Fruit Bowl,Fruit Bowl is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,120,20.3,44.6,22.9,4.3
+451,Vegan,Evening Snack,Veg Sandwich,Veg Sandwich is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,278,10.0,46.6,6.2,14.0
+452,Vegan,Mid Morning Snack,Coconut Water,Coconut Water is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,103,15.1,67.5,22.7,3.2
+453,Vegan,Dinner,Tofu Curry,Tofu Curry is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,328,13.7,56.3,6.1,5.6
+454,Vegan,Mid Morning Snack,Coconut Water,Coconut Water is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,219,28.1,30.6,17.5,7.0
+455,Vegan,Mid Morning Snack,Fruit Bowl,Fruit Bowl is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,115,7.8,25.4,20.3,7.9
+456,Vegan,Dinner,Veg Stir Fry,Veg Stir Fry is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,594,32.3,37.2,22.4,13.5
+457,Vegan,Evening Snack,Veg Sandwich,Veg Sandwich is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,217,20.4,61.9,14.2,14.4
+458,Vegan,Breakfast,Oats Almond Milk,Oats Almond Milk is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,428,29.1,58.1,8.7,3.6
+459,Vegan,Breakfast,Fruit Bowl,Fruit Bowl is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,335,13.3,71.4,6.5,5.0
+460,Vegan,Lunch,Veg Khichdi,Veg Khichdi is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,462,13.6,26.8,11.6,5.7
+461,Vegan,Mid Morning Snack,Roasted Peanuts,Roasted Peanuts is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,221,24.1,31.8,17.6,5.7
+462,Vegan,Lunch,Veg Khichdi,Veg Khichdi is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,505,6.0,71.7,9.3,13.3
+463,Vegan,Dinner,Tofu Curry,Tofu Curry is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,587,29.6,29.3,18.9,13.4
+464,Vegan,Evening Snack,Roasted Makhana,Roasted Makhana is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,137,5.5,72.7,12.2,8.3
+465,Vegan,Mid Morning Snack,Fruit Bowl,Fruit Bowl is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,205,7.8,59.6,9.6,13.0
+466,Vegan,Lunch,Veg Khichdi,Veg Khichdi is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,550,19.1,69.1,20.4,13.3
+467,Vegan,Breakfast,Oats Almond Milk,Oats Almond Milk is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,358,34.7,26.8,20.5,3.9
+468,Vegan,Mid Morning Snack,Fruit Bowl,Fruit Bowl is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,263,9.7,67.9,15.1,12.2
+469,Vegan,Dinner,Tofu Curry,Tofu Curry is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,559,15.3,64.1,7.8,5.5
+470,Vegan,Mid Morning Snack,Coconut Water,Coconut Water is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,265,12.1,54.6,24.3,6.0
+471,Vegan,Evening Snack,Veg Sandwich,Veg Sandwich is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,217,22.7,28.3,19.6,14.0
+472,Vegan,Dinner,Tofu Curry,Tofu Curry is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,548,7.1,51.6,12.9,13.7
+473,Vegan,Breakfast,Oats Almond Milk,Oats Almond Milk is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,539,14.1,39.0,17.1,10.2
+474,Vegan,Lunch,Rajma Rice,Rajma Rice is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,468,28.7,56.4,17.9,3.5
+475,Vegan,Lunch,Chole Roti,Chole Roti is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,632,15.0,59.8,7.6,10.6
+476,Vegan,Dinner,Tofu Curry,Tofu Curry is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,593,25.3,47.8,8.6,6.9
+477,Vegan,Dinner,Veg Stir Fry,Veg Stir Fry is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,383,31.5,59.0,6.5,9.7
+478,Vegan,Lunch,Chole Roti,Chole Roti is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,458,27.8,31.5,18.7,3.5
+479,Vegan,Evening Snack,Veg Sandwich,Veg Sandwich is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,161,17.7,34.5,17.3,4.1
+480,Vegan,Breakfast,Sprouts Salad,Sprouts Salad is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,486,32.1,30.4,13.8,8.1
+481,Vegan,Lunch,Rajma Rice,Rajma Rice is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,467,30.2,32.9,22.1,9.7
+482,Vegan,Evening Snack,Roasted Makhana,Roasted Makhana is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,226,7.6,45.0,16.8,3.6
+483,Vegan,Mid Morning Snack,Roasted Peanuts,Roasted Peanuts is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,254,8.3,63.8,10.1,11.8
+484,Vegan,Dinner,Tofu Curry,Tofu Curry is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,643,24.2,29.1,12.8,11.8
+485,Vegan,Lunch,Rajma Rice,Rajma Rice is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,642,33.8,45.2,10.3,5.3
+486,Vegan,Dinner,Veg Stir Fry,Veg Stir Fry is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,423,24.2,37.9,7.5,8.8
+487,Vegan,Dinner,Tofu Curry,Tofu Curry is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,315,15.4,24.2,16.8,9.4
+488,Vegan,Evening Snack,Roasted Makhana,Roasted Makhana is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,251,30.8,74.6,17.7,5.8
+489,Vegan,Breakfast,Fruit Bowl,Fruit Bowl is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,420,19.0,20.3,7.0,8.7
+490,Vegan,Mid Morning Snack,Coconut Water,Coconut Water is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,177,33.2,73.0,5.4,9.1
+491,Vegan,Dinner,Veg Stir Fry,Veg Stir Fry is a dinner meal prepared in an Indian style with balanced nutrition and moderate oil usage.,563,16.6,74.1,23.2,3.1
+492,Vegan,Evening Snack,Veg Sandwich,Veg Sandwich is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,229,11.8,47.7,8.9,4.0
+493,Vegan,Breakfast,Sprouts Salad,Sprouts Salad is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,376,10.4,69.9,6.7,13.1
+494,Vegan,Mid Morning Snack,Fruit Bowl,Fruit Bowl is a mid morning snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,254,26.5,47.1,23.0,7.3
+495,Vegan,Lunch,Rajma Rice,Rajma Rice is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,600,27.4,38.4,6.1,13.3
+496,Vegan,Evening Snack,Veg Sandwich,Veg Sandwich is a evening snack meal prepared in an Indian style with balanced nutrition and moderate oil usage.,140,19.8,53.3,20.8,13.3
+497,Vegan,Lunch,Veg Khichdi,Veg Khichdi is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,468,21.1,49.8,21.2,11.4
+498,Vegan,Lunch,Rajma Rice,Rajma Rice is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,315,12.8,64.7,5.7,6.7
+499,Vegan,Breakfast,Sprouts Salad,Sprouts Salad is a breakfast meal prepared in an Indian style with balanced nutrition and moderate oil usage.,335,32.0,40.6,19.0,6.1
+500,Vegan,Lunch,Veg Khichdi,Veg Khichdi is a lunch meal prepared in an Indian style with balanced nutrition and moderate oil usage.,573,16.4,45.6,12.9,13.0

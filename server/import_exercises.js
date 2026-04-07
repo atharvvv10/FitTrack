@@ -24,18 +24,18 @@ const EXERCISES_FILE = path.join(__dirname, '../exercise-data/dist/exercises.jso
 const createTableQuery = `
 DROP TABLE IF EXISTS exercises;
 CREATE TABLE exercises (
-    id STRING PRIMARY KEY,
-    name STRING NOT NULL,
-    force STRING,
-    level STRING,
-    mechanic STRING,
-    equipment STRING,
+    id TEXT PRIMARY KEY,
+    name TEXT NOT NULL,
+    force TEXT,
+    level TEXT,
+    mechanic TEXT,
+    equipment TEXT,
     primary_muscles JSONB,
     secondary_muscles JSONB,
     instructions JSONB,
-    category STRING,
+    category TEXT,
     images JSONB,
-    created_at TIMESTAMP DEFAULT current_timestamp()
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 `;
 
@@ -60,10 +60,11 @@ async function importExercises() {
 
         for (const ex of exercises) {
             const query = `
-                UPSERT INTO exercises (
+                INSERT INTO exercises (
                     id, name, force, level, mechanic, equipment, 
                     primary_muscles, secondary_muscles, instructions, category, images
                 ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+                ON CONFLICT (id) DO UPDATE SET name = EXCLUDED.name, force = EXCLUDED.force, level = EXCLUDED.level, mechanic = EXCLUDED.mechanic, equipment = EXCLUDED.equipment, primary_muscles = EXCLUDED.primary_muscles, secondary_muscles = EXCLUDED.secondary_muscles, instructions = EXCLUDED.instructions, category = EXCLUDED.category, images = EXCLUDED.images
             `;
 
             const values = [

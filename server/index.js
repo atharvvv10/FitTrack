@@ -22,11 +22,11 @@ async function seedFoodDatabase() {
         await pool.query(`
             CREATE TABLE IF NOT EXISTS food_items (
                 id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-                name STRING NOT NULL,
+                name TEXT NOT NULL,
                 calories INT NOT NULL,
                 protein_g FLOAT, carbs_g FLOAT, fat_g FLOAT, fibre_g FLOAT,
-                food_group STRING, diet_type STRING, source STRING,
-                created_at TIMESTAMP DEFAULT current_timestamp()
+                food_group TEXT, diet_type TEXT, source TEXT,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )
         `);
 
@@ -34,15 +34,16 @@ async function seedFoodDatabase() {
         const countResult = await pool.query('SELECT COUNT(*) FROM food_items');
         const count = parseInt(countResult.rows[0].count);
 
-        if (count > 100) {
+        // Auto-reseed if we don't have the new massive DB
+        if (count >= 4400) {
             console.log(`Food DB ready: ${count} foods loaded`);
             return;
         }
 
-        // Import from CSV
-        const csvPath = path.join(__dirname, '../food-data/combined_indian_foods.csv');
+        console.log(`Food DB has ${count} records. Seeding new dataset...`);
+        const csvPath = path.join(__dirname, '../food-data/Indian_Diet_3000.csv');
         if (!fs.existsSync(csvPath)) {
-            console.warn('food-data/combined_indian_foods.csv not found — skipping food seeding');
+            console.warn('food-data/Indian_Diet_3000.csv not found — skipping food seeding');
             return;
         }
 
@@ -57,11 +58,20 @@ async function seedFoodDatabase() {
             const params = [], values = [];
             let p = 1;
             for (const line of batch) {
-                const m = line.match(/^"([^"]+)",(\d+),([0-9.]+),([0-9.]+),([0-9.]+),([0-9.]+),"([^"]+)","([^"]+)","([^"]+)"$/);
-                if (!m) continue;
-                const [, name, cal, pro, carbs, fat, fib, grp, diet, src] = m;
+                const cols = line.split(',');
+                if (cols.length < 10) continue;
+                const diet_type = cols[1];
+                const food_group = cols[2];
+                const name = cols[3].replace(/"/g, '').trim();
+                const source = cols[4].replace(/"/g, '').trim();
+                const cal = parseInt(cols[5]);
+                const pro = parseFloat(cols[6]);
+                const carbs = parseFloat(cols[7]);
+                const fat = parseFloat(cols[8]);
+                const fib = parseFloat(cols[9]);
+
                 params.push(`($${p++},$${p++},$${p++},$${p++},$${p++},$${p++},$${p++},$${p++},$${p++})`);
-                values.push(name, parseInt(cal), parseFloat(pro), parseFloat(carbs), parseFloat(fat), parseFloat(fib), grp, diet, src);
+                values.push(name, cal, pro, carbs, fat, fib, food_group, diet_type, source);
             }
             if (params.length) {
                 await pool.query(
@@ -191,7 +201,7 @@ app.post('/api/diet/log', async (req, res) => {
                 calories = EXCLUDED.calories,
                 protein = EXCLUDED.protein,
                 completed = EXCLUDED.completed,
-                created_at = current_timestamp();
+                created_at = CURRENT_TIMESTAMP;
         `;
         const values = [userId, date, mealType, foodName, calories, protein, completed];
 

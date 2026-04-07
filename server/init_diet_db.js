@@ -11,14 +11,14 @@ const pool = new pg.Pool({
 const createTableQuery = `
 CREATE TABLE IF NOT EXISTS diet_logs (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    user_id STRING NOT NULL,
+    user_id TEXT NOT NULL,
     date DATE NOT NULL,
-    meal_type STRING NOT NULL,
-    food_name STRING,
+    meal_type TEXT NOT NULL,
+    food_name TEXT,
     calories INT,
     protein INT,
     completed BOOLEAN DEFAULT TRUE,
-    created_at TIMESTAMP DEFAULT current_timestamp(),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     UNIQUE (user_id, date, meal_type)
 );
 `;

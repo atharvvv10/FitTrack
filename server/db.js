@@ -21,12 +21,12 @@ const isProduction = process.env.NODE_ENV === 'production' || process.env.RENDER
 let sslConfig = { rejectUnauthorized: false }; // Default for cloud (Render/CockroachDB often needs this or CA string)
 
 // Only try to load local cert if we are NOT in production AND the file exists
-if (!isProduction && fs.existsSync(certPath)) {
-    sslConfig = {
-        rejectUnauthorized: true,
-        ca: fs.readFileSync(certPath).toString(),
-    };
-}
+// if (!isProduction && fs.existsSync(certPath)) {
+//     sslConfig = {
+//         rejectUnauthorized: true,
+//         ca: fs.readFileSync(certPath).toString(),
+//     };
+// }
 
 const pool = new Pool({
     connectionString: dbUrl,

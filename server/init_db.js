@@ -3,14 +3,14 @@ import pool from './db.js';
 const createWorkoutsTable = `
 CREATE TABLE IF NOT EXISTS workouts (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    user_id STRING NOT NULL,
-    title STRING NOT NULL,
-    date TIMESTAMP WITH TIME ZONE DEFAULT current_timestamp(),
+    user_id TEXT NOT NULL,
+    title TEXT NOT NULL,
+    date TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     duration INT,
-    difficulty STRING,
+    difficulty TEXT,
     exercises JSONB,
-    notes STRING,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT current_timestamp()
+    notes TEXT,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 `;
 

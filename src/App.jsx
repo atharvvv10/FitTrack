@@ -87,7 +87,19 @@ function App() {
           } else {
             setAppState('onboarding');
           }
-        } catch (e) { console.error("Auth error", e); }
+        } catch (e) {
+          console.error("Auth error", e);
+          if (e.code === 'permission-denied') {
+            // If they don't have permission to read the doc (Firetore rules issue),
+            // sign them out so they aren't stuck on a blank screen
+            await signOut(auth);
+            setAppState('auth');
+            // We can use an alert or a global notification here ideally, but for now we'll just sign them out
+            alert("Database Permission Denied. Please ensure your Firebase Firestore Rules are set up correctly.");
+          } else {
+            setAppState('onboarding');
+          }
+        }
       } else {
         if (sessionStorage.getItem('signupSuccess')) setAppState('auth');
         else setAppState('landing');
@@ -102,10 +114,14 @@ function App() {
         if (res.ok) {
           const data = await res.json();
           setExerciseLibrary(data);
-          setLibraryLoaded(true);
+        } else {
+          console.error("Failed to load exercises: HTTP", res.status);
         }
       } catch (err) {
         console.error("Failed to load exercises", err);
+      } finally {
+        // Always unblock the UI — even if exercises fetch fails
+        setLibraryLoaded(true);
       }
     };
     fetchExercises();
@@ -223,7 +239,7 @@ function App() {
       meals: [...prev.meals, ...newMealNames].slice(-50)
     }));
 
-    generateDietPlan({
+    generateAIDiet({
       goal: safeContext.goal,
       diet_type: safeContext.diet_type,
       allergies: safeContext.allergies,
